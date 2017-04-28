@@ -1,0 +1,93 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Bold;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;\red86\green219\blue233;\red34\green79\blue188;\red88\green229\blue64;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17120\viewh11240\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Notes for Thurs 13th April \
+\
+Test Driven Development\
+\
+Verify that code behaves as expected\
+\
+TDD is all about developing the tests first then the code, do not jump into the code. The idea is to make the test fail so you can make a distinction when it passes. Progress then each time you see an error message to develop the tests and the code. The error message will tell us what to do. Write a failing test first and progress from there. \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b \cf2 \cb3 \CocoaLigature0 fizzbuzz
+\f2\b0 \cf1  touch fizzbuzz.rb\
+
+\f1\b \cf4 \uc0\u10140   \cf2 fizzbuzz
+\f2\b0 \cf1  touch fizzbuzz_spec.rb\
+
+\f1\b \cf4 \uc0\u10140   \cf2 fizzbuzz
+\f2\b0 \cf1  subl .\
+
+\f1\b \cf4 \uc0\u10140   \cf2 fizzbuzz
+\f2\b0 \cf1  gem install minitest-rg
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+gem is a minutest application that can be used for developing tests\
+\
+so delete the fizzbuzz.rb and then the fizzbuzz_spec.rb will fail with an error.\
+touch a fizz buzz.rb and the test will pass. \
+\
+Most Ruby written in text editors, some employers have IDE\'92s. \
+\
+sublime text shortcuts\
+\
+system preferences - keyboard - key repeat \'91fast\'92 and delay until repeat \'91short\'92\
+cmd/s save\
+command window cmd/- smaller size cmd/+ larger size ( cmd/0 - sets to default\
+cmd/n - new file\
+cmd/f - find \
+cmd/shift/f - find/where/replace\
+cmd/, - to see preferences\
+escape - to get back to original window (and remove payment request)\
+cmd/w - close  tab\
+cmd/t - multiple windows \
+cmd/ctrl/up, down arrows to move line or lines to another place in code\
+cmd/left arrow start, right arrow end line\
+cmd/shift and arrow will select to end of line i.e. selects as you go\
+alt/arrow keys - moves by one word\
+alt/cmd + backspace\
+cmd/click will put cursor at one location, click again to put another cursor then can edit two lines at a time\
+cmd/d once when in a word and it will select the whole word cmd/d again - it will look for the next occurrence of that work, repeat. Click anywhere to stop \
+multiple cursors.\
+cmd/p - file finder in the current sublime window in cmd/p window go to file then :<line number> will go to the line number\
+cmd/shift/p then type in install then install the package required\
+alt/cmd/shift + arrow keys \
+cmd/c and cmd/v \
+cmd/+ cmd/- to magnify or shrink\
+cmd/a - select all\
+cmd/shift/r - to indent for you\
+cmd/shift/left [ brackets and right ] brackets\
+\
+Getting Trainers Notes from GitHub on local machine\
+SSH is git@github.com:codeclan/e12_classnotes\
+I have cloned this to my directory:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2 \cf1 \cb3 \CocoaLigature0 /Users/user/Desktop/CodeClan/Training/week01/TrainersNotes/e12_classnotes
+\f0 \cf0 \cb1 \CocoaLigature1 \
+in this directory type git pull and the notes will be updated in week01\
+use git pull to get everything you need for exercises, etc.\
+\
+Error Messages\
+worth putting in puts to debug code to see what is happening around the location of an error\
+this will help us look at the flow of code.\
+\
+Git/Commit\
+Good practice to make a change e.g. a test, etc and commit to GitHub straight away - even if it is a minimal amount of code. \
+\
+Exercise\
+friends \
+{\field{\*\fldinst{HYPERLINK "https://github.com/codeclan/e12_classnotes/blob/master/week_01/day_04/friends_lab/friends_lab.md"}}{\fldrslt https://github.com/codeclan/e12_classnotes/blob/master/week_01/day_04/friends_lab/friends_lab.md}}\
+\
+def setup - this is so we can repeat the tests\
+the @ symbol is an instance variable - it is accessible to all the functions. In test use the @ symbol in the friends_spec.rb NOT the friends.db function file.\
+\
+}

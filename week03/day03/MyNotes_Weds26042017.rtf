@@ -1,0 +1,303 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Menlo-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red34\green79\blue188;\red88\green229\blue64;\red0\green0\blue152;
+\red97\green0\blue1;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww12860\viewh8360\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+One to Many in SQL & Ruby\
+\
+What are they?\
+Make 1-2-M in SQL\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 Make 1-2-M in Ruby\
+\
+Postures and SQL are relational databases \
+\
+Pizza Order\
+one customer can have many pizza orders as opposed to one so the customer cannot see what they have ordered previously. So there will be a orders table and a customers table:\
+\
+pizza_orders		customers\
+topping			name\
+quantity\
+\
+Every pizza order will have one customer\
+But a customer can have many orders of a period of time\
+\
+-- the following it to be a unique link to customers  \
+  customer_id INT4 REFERENCES customers(id)\
+\
+Note here that options is a VARCHAR so no need for the to_i()\
+\
+ def initialize(options)\
+    @id = options['id'].to_i() if options['id']\
+    @name = options['name']\
+  end\
+\
+customer.db - These statements create methods that return the values id and name \
+\
+  attr_reader :id\
+  attr_accessor :name\
+\
+Typical Errors\
+\
+localhost instead of local\
+initialise spelt incorrectly\
+\
+console.db\
+\
+PizzaOrder.delete_all()\
+\
+# the customer must be deleted after pizza order \
+# as customer dependent on pizza order\
+# delete_all() is needed to stop save happening\
+# every time\
+Customer.delete_all()\
+\
+console.rb\
+\
+Add the line:\
+customer1 = Customer.new(\{ 'name' => 'Mike' \})\
+\
+Remove the first_name and last_name as we will be using the customer_id \
+\
+  'customer_id' => customer1.id\
+\
+i.e. use the customer1 object (via accessor) to access the id.\
+\
+As we are repeating ourself with db.close() and db.exec, etc\
+\
+in SqlRunner.rb file\
+\
+This is a class that does the db. lines so that we are not putting it in console.db file\
+\
+begin/ensure/end is an error catching method - it is saying even if there is an issue with\
+our code carry out the code anywhere\
+\
+Boilerplate code is code that is used everywhere\
+\
+    begin \
+      db = PG.connect(\{dbname: 'pizza_shop', host: 'localhost'\})\
+      result = db.exec(sql)\
+    ensure\
+      db.close()\
+    end\
+\
+# we want to return instances of our customer class \
+    # i.e. customer objects (hashes are not as useful)\
+\
+to run code:\
+\
+ruby ./db/console.db\
+\
+will go into pry with prompt\
+pry(main)>\
+\
+test model with \
+\
+PizzaOrder.all() - will see all the orders\
+\
+for individual\'92s orders type:\
+\
+pry(main)>order1    (to see all the initialised values)\
+\
+(same with order2 or order3) \
+\
+come out of pry with !!!\
+\
+if made changed need to recompile the console code with \
+ruby db/console.db\
+\
+then once in pry run all the tests as usual e.g. PizzaOrder.all() - to see all the orders\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0   @customer_id\cf3 =
+\f2\b \cf4 57
+\f1\b0 \cf1 ,\
+  @id\cf3 =
+\f2\b \cf4 16
+\f1\b0 \cf1 ,\
+  @quantity\cf3 =
+\f2\b \cf4 10
+\f1\b0 \cf1 ,\
+  @topping\cf3 =
+\f2\b \cf5 "
+\f1\b0 Pepperoni
+\f2\b "
+\f1\b0 \cf3 >\cf1 ]\
+[3] pry(main)> 
+\f2\b \cf4 \ul \ulc4 PizzaOrder
+\f1\b0 \cf1 \ulnone .find(
+\f2\b \cf4 16
+\f1\b0 \cf1 )\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+Test customer\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\b \cf4 \cb2 \ul \ulc4 \CocoaLigature0 Customer
+\f1\b0 \cf1 \ulnone .all.first
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+test model with \
+\
+order = PizzaOrder.find(<id>)\
+\
+Customer.all\
+\
+Customer.all.first\
+\
+Customer.all.first.name\
+\
+Customer.all.first.id\
+\
+lab\
+\
+TASK: Write the .customer method for our PizzaOrder class and the .pizza_orders method for our Customer class.\
+\
+Some tips:\
+\
+Write these tips on the board for the class to refer to\
+\
+.customer method:\
+\
+Our Order objects know their own @customer_id\
+We can use this in our SQL statement (use SqlRunner) to get back the customer data.\
+Our .customer method should return a Customer object, an instance of the Customer class\
+\
+.pizza_orders method\
+\
+Our Customer objects know their own @id\
+We can use this in our SQL statement (use SqlRunner) to get back the data for all of their orders.\
+Our .pizza_orders method should return an array of PizzaOrder objects, instances of the PizzaOrder class\
+\
+\
+TESTING the customer method\
+\
+PizzaOrder\
+PizzaOrder.all()\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 [5] pry(main)> order.customer()\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 => \cf3 #<Customer:0x007f8e89305d30\cf1  @id\cf3 =
+\f2\b \cf4 96
+\f1\b0 \cf1 , @name\cf3 =
+\f2\b \cf5 "
+\f1\b0 Mike
+\f2\b "
+\f1\b0 \cf3 >
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 6] pry(main)> order.customer().name()\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 => 
+\f2\b \cf5 "
+\f1\b0 Mike
+\f2\b "\
+
+\f0\b0 \cf0 \cb1 \CocoaLigature1 \
+
+\f1 \cf1 \cb2 \CocoaLigature0 [7] pry(main)> order = PizzaOrder.find(74)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 (where @id = 74)\
+\
+testing the pizza order \
+\
+run the ruby console again (ruby models/console.rb)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 customer1\
+=> \cf3 #<Customer:0x007fc0db253228\cf1  @id\cf3 =
+\f2\b \cf4 98
+\f1\b0 \cf1 , @name\cf3 =
+\f2\b \cf5 "
+\f1\b0 Mike
+\f2\b "
+\f1\b0 \cf3 >\cf1 \
+[2] pry(main)> customer1.orders\
+=> [\cf3 #<PizzaOrder:0x007fc0db2803e0\cf1 \
+  @customer_id\cf3 =
+\f2\b \cf4 98
+\f1\b0 \cf1 ,\
+  @id\cf3 =
+\f2\b \cf4 77
+\f1\b0 \cf1 ,\
+  @quantity\cf3 =
+\f2\b \cf4 1
+\f1\b0 \cf1 ,\
+  @topping\cf3 =
+\f2\b \cf5 "
+\f1\b0 Napoli
+\f2\b "
+\f1\b0 \cf3 >\cf1 ,\
+ \cf3 #<PizzaOrder:0x007fc0db2802f0\cf1 \
+  @customer_id\cf3 =
+\f2\b \cf4 98
+\f1\b0 \cf1 ,\
+  @id\cf3 =
+\f2\b \cf4 78
+\f1\b0 \cf1 ,\
+  @quantity\cf3 =
+\f2\b \cf4 1
+\f1\b0 \cf1 ,\
+  @topping\cf3 =
+\f2\b \cf5 "
+\f1\b0 Quattro Formaggi
+\f2\b "
+\f1\b0 \cf3 >\cf1 ]\
+[3] pry(main)> customer1.orders[
+\f2\b \cf4 1
+\f1\b0 \cf1 ]\
+=> \cf3 #<PizzaOrder:0x007fc0db1c36c8\cf1 \
+ @customer_id\cf3 =
+\f2\b \cf4 98
+\f1\b0 \cf1 ,\
+ @id\cf3 =
+\f2\b \cf4 78
+\f1\b0 \cf1 ,\
+ @quantity\cf3 =
+\f2\b \cf4 1
+\f1\b0 \cf1 ,\
+ @topping\cf3 =
+\f2\b \cf5 "
+\f1\b0 Quattro Formaggi
+\f2\b "
+\f1\b0 \cf3 >\cf1 \
+[4] pry(main)> customer1.orders[
+\f2\b \cf4 1
+\f1\b0 \cf1 ].customer\
+=> \cf3 #<Customer:0x007fc0db113cf0\cf1  @id\cf3 =
+\f2\b \cf4 98
+\f1\b0 \cf1 , @name\cf3 =
+\f2\b \cf5 "
+\f1\b0 Mike
+\f2\b "
+\f1\b0 \cf3 >\cf1 \
+ pry(main)> customer1.orders[
+\f2\b \cf4 1
+\f1\b0 \cf1 ].customer.orders[
+\f2\b \cf4 0
+\f1\b0 \cf1 ].customer
+\f0 \cf0 \cb1 \CocoaLigature1 \
+}

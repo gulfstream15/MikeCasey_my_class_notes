@@ -1,0 +1,189 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red34\green79\blue188;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17400\viewh11960\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Training \
+\
+Homework Recap\
+\
+Look up docs to see how round works round(2) will round down 2 dp.\
+\
+{\field{\*\fldinst{HYPERLINK "https://github.com/codeclan"}}{\fldrslt https://github.com/codeclan}}\
+\
+In Ruby development:\
+\
+To clear whilst in irb\
+\
+cmd/k\
+ctrl/l\
+\
+(clear does not work)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 fruit = ["apple", "banana", "grape", "orange"]\
+(to see what is in the array just type the array
+\f0 \cf0 \cb1 \CocoaLigature1  name)\
+minus goes from right to left i.e. backwards (-1 is the rightmost element). Think of indices as wrapping around\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 fruit[-1] is \'93orange\'94\
+\
+fruit[-2] is \'93grape\'94
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+fruit.first() - 1st element, 
+\f1 \cf1 \cb2 \CocoaLigature0 fruit.first(2) first two
+\f0 \cf0 \cb1 \CocoaLigature1 \
+fruit.last() - last element 
+\f1 \cf1 \cb2 \CocoaLigature0 fruit.last(2) last two
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 my_array = [] and my_array = Array.new will give you new arrays with nothing in\
+\
+fruit[1] = "Mango"\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 push adds to the next available slot\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 my_array.push("pear")\
+\
+my_array.push("kiwi")\
+\
+=> ["pear", "kiwi"]\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+can also my_array << \'93kiwi\'94 use shovel as equivalent to push\
+\
+pop takes out element at end of array and can add an element  \
+\
+fruit.shift() - takes off the element at the front (left most)\
+\
+fruit.unshift() - puts the element back in to first slot and pushes everything up (so indices all increased by 1 from the 1st element)\
+\
+to see an array just type in the name e.g fruit\
+\
+Ruby does not need you to tell it what size array you want (unlike Java)\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 numbers = [1, 2, 3, [4, 5, 6]]\
+=> [1, 2, 3, [4, 5, 6]]\
+irb(main):031:0> numbers[3]\
+=> [4, 5, 6]\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+
+\f1 \cf1 \cb2 \CocoaLigature0 my_animals[1,2] to return the elements in my_animals[1] and my_animals[2]
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 my_animals.at(0) to see first element\
+\
+my_array = [ 4, 5, 6, [7, 8] ]\
+=> [4, 5, 6, [7, 8]]\
+irb(main):055:0> my_array.flatten\
+=> [4, 5, 6, 7, 8]\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+Hashes\
+\
+my_hash = Hash.new() or my_hash = \{\}\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 meals = \{"breakfast" => "banana", "snack" => "apple", "lunch" => "panini", "dinner" => "steak"\} 
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+=> is a hash rocket\
+\
+use the key to access its element - uses the [] syntax\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 meals["dinner"]
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+if accessing a key that doesn\'92t exist then will get a nil\
+\
+To add a new key/element\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 meals["supper"] = "toast"\
+=> "toast"\
+irb(main):087:0> meals\
+=> \{"breakfast"=>"banana", "snack"=>"apple", "lunch"=>"panini", "dinner"=>"steak", "supper"=>"toast"\}
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+Hashes are not concerned with order - use arrays for that.\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 meals["breakfast"] = "eggs"\
+=> "eggs"\
+irb(main):089:0> meals\
+=> \{"breakfast"=>"eggs", "snack"=>"apple", "lunch"=>"panini", "dinner"=>"steak", "supper"=>"toast"\}
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+To add an array to a key\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 meals["breakfast"] = ["eggs", "toast", "kippers"]\
+=> ["eggs", "toast", "kippers"]\
+irb(main):091:0> meals\
+=> \{"breakfast"=>["eggs", "toast", "kippers"], "snack"=>"apple", "lunch"=>"panini", "dinner"=>"steak", "supper"=>"toast"\}
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+meals[\'93breakfast\'94][0] - we can use this to access the zeroth element of the hash this will return \'93eggs\'94 in the above i.e. first element of array i.e. array[0]\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 meals.delete("breakfast")
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+to see individual values and keys\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 meals.values()\
+=> ["apple", "panini", "steak", "toast"]\
+irb(main):095:0> meals.keys()\
+=> ["snack", "lunch", "dinner", "supper"]
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+As breakfast is an array, all the methods of an array are available:\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 meals["breakfast"].push("bacon")\
+\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+Symbols\
+\
+they are a more efficient way to access data \
+\
+Note the dinner key - its is shorthand i.e. :dinner => \'93steak\'94 IS THE SAME AS dinner: \'93steak\'94\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 meals = \{:breakfast => "banana", :lunch => "panini", dinner: "steak" \}\
+=> \{:breakfast=>"banana", :lunch=>"panini", :dinner=>"steak"\}
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+see countries.hash\
+\
+adding another avenger to the existing avengers hash\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 avengers[:spiderman] = \{\
+  name: "Peter Parker"\
+  moves: \{\
+    shoot_webs: 300;\
+    jumps_on_heads: 20\
+  \}\
+\}\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+Loops\
+\
+}

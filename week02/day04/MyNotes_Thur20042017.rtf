@@ -1,0 +1,284 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Menlo-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red34\green79\blue188;\red0\green0\blue152;\red204\green203\blue60;
+\red86\green219\blue233;\red97\green0\blue1;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14980\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Week 02 Day04\
+\
+Blocks \
+\
+Blocks enable \
+\
+Can\'92t assign an block to a variable - they are NOT objects\
+\
+# The \{\} is the block being passed in \
+ # you are passing functionality to the function\
+\
+# Note here this is the map() from the array class\
+    # and not our map() function\
+    result_array = array.map() \{ |item| item ** 2 \} \
+\
+where map is a method on the Array class\
+\
+the Array class is passing in the |item| and we state what we do with it \
+\
+Two approaches (board_spec) - curly bracket or end\
+\
+ def test_array_map_square\
+    array = [1, 2, 3]\
+    # Note here this is the map() from the array class\
+    # and not our map() function. Testing Ruby rather\
+    # than our function\
+    result = array.map() \{ |item| item * item \} \
+    assert_equal( [1, 4, 9], result)\
+  end\
+\
+  def test_array_map_square_with_do_syntax\
+    array = [1, 2, 3]\
+    # do different syntax but doing same as above \
+    # convention here is to put what to do to elements\
+    # in next line\
+    result = array.map() do |item|  \
+      item * item \
+    end \
+    assert_equal( [1, 4, 9], result)\
+  end\
+\
+\'91each\'92  it is just an alternative to \'91for\'92 loop e.g. \
+\
+def test_each\
+    array = [1, 2, 3]\
+    array.each() \{ |item| puts item \}\
+    assert_equal( [1, 2, 3], result)\
+  end\
+\
+Also can write out the index with each_with_index:\
+\
+def test_each_puts\
+    array = ["Craig", "Sandy", "Sian"]\
+    array.each_with_index() do |element, index|\
+      puts element\
+      puts element *  2     # can multiply strings in Ruby!\
+      puts index\
+    end\
+  end\
+Array Blocks\
+Many examples of methods that can be used e.g.\
+find - to find an item in an array\
+\
+select - have a condition of some sort for outputting from an array:\
+\
+def test_each_puts\
+    array = [5, 4, 3, 2, 1, 1, 2, 3, 4, 5]\
+    result = array.select() do |item| \
+      item >= 4\
+    end\
+      assert_equal([5, 4, 4, 5], result)\
+  end\
+\
+For printing out arrays it is worth using inspect:\
+\
+puts result.inspect()\
+\
+so will get [1, 2, 3]\
+\
+Use find to find only one thing\
+Use select to return more than one thing - it returns an array\
+\
+Debugging\
+\
+in terminal:\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 gem install pry pry-byebug
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 In the pry_start_point
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+will this error:\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 TypeError: Hash can't be coerced into Integer\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+i.e. what we think is a number is actually a hash\
+\
+use pry to debug\
+once pry installed will get a new console window - out the binding(pry) BEFORE the error line\
+in new console window type\
+counter (to see what counter is)\
+will get => 0\
+average (to see what average is)\
+will get => nil\
+rating \
+=> is returning a whole hash not an integer rating - this is the error - we can\'92t add a hash to an integer\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 [1] pry(#<CakeShop>)> ls\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\b \cf3 CakeShop#methods
+\f1\b0 \cf1 : average_cake_rating  cakes\
+
+\f2\b \cf3 instance variables
+\f1\b0 \cf1 : \cf3 @cakes\cf1 \
+
+\f2\b \cf3 locals
+\f1\b0 \cf1 : _  __  _dir_  _ex_  _file_  _in_  _out_  _pry_  \cf4 average\cf1   \cf4 counter\cf1   \cf4 rating\cf1 \
+[2] pry(#<CakeShop>)> counter\
+=> 
+\f2\b \cf3 0
+\f1\b0 \cf1 \
+[3] pry(#<CakeShop>)> average\
+=> 
+\f2\b \cf5 nil
+\f1\b0 \cf1 \
+[4] pry(#<CakeShop>)> rating\
+=> \{\cf4 :name\cf1 =>
+\f2\b \cf6 "
+\f1\b0 brownie
+\f2\b "
+\f1\b0 \cf1 ,\
+ \cf4 :ingriedients\cf1 =>[
+\f2\b \cf6 "
+\f1\b0 chocolate
+\f2\b "
+\f1\b0 \cf1 , 
+\f2\b \cf6 "
+\f1\b0 cocoa powder
+\f2\b "
+\f1\b0 \cf1 , 
+\f2\b \cf6 "
+\f1\b0 flour
+\f2\b "
+\f1\b0 \cf1 , 
+\f2\b \cf6 "
+\f1\b0 eggs
+\f2\b "
+\f1\b0 \cf1 , 
+\f2\b \cf6 "
+\f1\b0 sugar
+\f2\b "
+\f1\b0 \cf1 , 
+\f2\b \cf6 "
+\f1\b0 butter
+\f2\b "
+\f1\b0 \cf1 ],
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+the code has not got to line 18 due to location of binding call:\
+\
+def average_cake_rating()\
+\
+    @cakes.map \{ |cake| cake[:rating] \}\
+    counter = 0\
+\
+    for rating in @cakes\
+      binding.pry            # this puts a break point in the code\
+      counter += rating\
+    end\
+\
+Therefore we are looping through an array of cakes and not ratings\
+\
+Once we have made the appropriate changes (see cake_shop.rb) come out of pry with \
+!!!\
+the ruby ./specs/cake_shop.rb again\
+then look at counter, ratings and average to check ok\
+\
+use \'91next\'92 to go to next line \
+then continue will give \'915\'92\
+ratings will give \'913\'92\
+use \'91continue\'92 to go to next break point \
+\
+When happy with code remove\
+the require line for pry and the binding line for pry\
+\
+Can fire up pry: \
+pry  - command on its own in console can do to same as ruby \
+\
+Inheritance\
+\
+Be able to describe inheritance\
+Be able to implement superclass and subclass\
+Know how to override methods\
+Share initialisers\
+\
+# This is the notation for inheritance\
+\
+class Motorbike < Vehicle\
+\
+Inheritance is an \'91is a\'92 relationship - use for lots of similar code in different files\
+\
+ruby looks from the bottom up so for overriding ruby looks in the subclass first then the superclass\
+\
+the subclasses inherit all the methods (including initialize) and instance variables from the super class\
+\
+BE CAREFUL TYPING - initialise was initalise  and TOOK AGES TO SPOT!\
+\
+in car class\
+\
+You can use the initialise method in the superclass as below: \
+\
+Called share initialisers\
+\
+require_relative('vehicle')\
+\
+class Car < Vehicle\
+  \
+  # this overrides the initialize in the superclass we can do the same in motorbike\
+  def initialize\
+    super(4)\
+  end\
+\
+In car_spec.rb \
+\
+Can assign a model via\
+   \
+def setup\
+  @car = Car.new("Ferrari")\
+end\
+\
+def test_car_can_start_engine\
+  assert_equal("Vrmmmmmm", @car.start_engine())\
+end\
+\
+def test_vehicle_has_number_of_wheels\
+  assert_equal(4, @car.number_of_wheels)\
+end\
+\
+def test_car_has_model\
+  assert_equal("Ferrari", @car.model)\
+end\
+\
+the model is made available via the code below in car.rb\
+\
+class Car < Vehicle\
+\
+  attr_reader :model\
+  \
+  # this overrides the initialize in the superclass we can do the same in motorbike\
+  def initialize(model)\
+    super(4)\
+    @model = model\
+  end\
+  \
+end \
+\
+DO NOT PUT COMMENTS IN - make code readable as comments shouldn\'92t be necessary\
+\
+\
+\
+}

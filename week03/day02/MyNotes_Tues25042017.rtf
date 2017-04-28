@@ -1,0 +1,471 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Menlo-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red34\green79\blue188;\red88\green229\blue64;\red86\green219\blue233;
+\red0\green0\blue152;\red97\green0\blue1;\red103\green0\blue109;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww12620\viewh10440\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Week03 Day02\
+\
+For SQL databases it is worth having a deleted id so that items are not completely deleted but are still in the table but are signified as deleted by the id. \
+\
+Objectives\
+Know how to talk to a DB from Ruby\
+Understand how classes map to tables and object map to rows\
+Be able to create a single model CRUD app\
+\
+Create orders\
+Read orders\
+Update orders\
+Delete orders\
+\
+unit tests should be independent i.e. not applicable to databases.\
+\
+A database gives you a hash as strings for the key and values so you need to write a to_i() in ruby \
+\
+When using pry you need to have a \'91nil\'92 after the binding line otherwise it won\'92t work\
+At top\
+require('pry-byebug')\
+\
+At bottom\
+binding.pry\
+nil\
+\
+TO COME OUT OF PRY USE TYPE IN \
+!!!\
+\
+create the database\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 !!!\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  \
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  \
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  \
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  \
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  createdb pizza_shop\
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  \
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  \
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  \
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  \
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  pwd   \
+/Users/user/Desktop/CodeClan/Training/week03/day02/pizza_shop\
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  mkdir db\
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  touch db/pizza_shop.sql\
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  \
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  \
+
+\f2\b \cf3 \cb2 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  psql -d pizza_shop -f db/pizza_shop.sql\
+psql:db/pizza_shop.sql:1: NOTICE:  table "pizza_orders" does not exist, skipping\
+DROP TABLE\
+CREATE TABLE\
+/Users/user/Desktop/CodeClan/Training/week03/day02/pizza_shop
+\f0 \cf0 \cb1 \CocoaLigature1 \
+
+\f2\b \cf3 \cb2 \CocoaLigature0 \uc0\u10140   \cf4 pizza_shop
+\f1\b0 \cf1 \cb2  gem install pg\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 where pg is the connection between the ruby code and the SQL database\
+\
+ # we need single quotes as SQL looks and sees a string\
+    # not just a selection of characters for first_name, last_name\
+    # and topping. Note quantity does not need single quotes\
+\
+    sql =\
+      "INSERT INTO pizza_orders\
+       (first_name, last_name, topping, quantity)\
+       VALUES\
+       ('#\{@first_name\}', '#\{@last_name\}', '#\{@topping\}', #\{@quantity\});"  \
+\
+To run:\
+\
+ruby console.db\
+pry(main)>\
+in pry\
+PizzaOrder.all().first()  \
+\
+gives a class giving back a variable that is treated like an array (an array of hashes)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 [2] pry(main)> 
+\f2\b \cf5 \cb2 \ul \ulc5 PizzaOrder
+\f1\b0 \cf1 \ulnone .all().first()\
+=> \{
+\f2\b \cf6 "
+\f1\b0 id
+\f2\b "
+\f1\b0 \cf1 =>
+\f2\b \cf6 "
+\f1\b0 1
+\f2\b "
+\f1\b0 \cf1 ,\
+ 
+\f2\b \cf6 "
+\f1\b0 first_name
+\f2\b "
+\f1\b0 \cf1 =>
+\f2\b \cf6 "
+\f1\b0 [
+\f2\b \cf7 \\"
+\f1\b0 \cf6 Ned
+\f2\b \cf7 \\"
+\f1\b0 \cf6 , 
+\f2\b \cf7 \\"
+\f1\b0 \cf6 Stark
+\f2\b \cf7 \\"
+\f1\b0 \cf6 , 
+\f2\b \cf7 \\"
+\f1\b0 \cf6 frozen
+\f2\b \cf7 \\"
+\f1\b0 \cf6 , 40]
+\f2\b "
+\f1\b0 \cf1 ,\
+ 
+\f2\b \cf6 "
+\f1\b0 last_name
+\f2\b "
+\f1\b0 \cf1 =>
+\f2\b \cf6 "
+\f1\b0 Stark
+\f2\b "
+\f1\b0 \cf1 ,\
+ 
+\f2\b \cf6 "
+\f1\b0 topping
+\f2\b "
+\f1\b0 \cf1 =>
+\f2\b \cf6 "
+\f1\b0 frozen
+\f2\b "
+\f1\b0 \cf1 ,\
+ 
+\f2\b \cf6 "
+\f1\b0 quantity
+\f2\b "
+\f1\b0 \cf1 =>
+\f2\b \cf6 "
+\f1\b0 40
+\f2\b "
+\f1\b0 \cf1 \}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+we don\'92t want to work with hashes - we want to work with arrays\
+\
+in pizza_order.rb\
+\
+def PizzaOrder.all() \
+      db = PG.connect(\{ dbname: 'pizza_shop', host: 'localhost'\})\
+      sql = "SELECT * FROM pizza_orders"\
+      result = db.exec(sql)\
+      db.close()\
+      # map takes a hash and returns a PizzaOrder that we can use\
+      # we want a PizzaOrder so we can work with it - we want \
+      # an array of objects we can use instead of hashes \
+      return result.map \{ |order_hash| PizzaOrder.new(order_hash) \}\
+    end\
+in the PizzaOrder class (pizza_order)\
+\
+    @id = params['id'].to_i if params['id']  # check not nil\
+\
+Now going running \
+console.db\
+in pry run PizzaOrder.all()\
+\
+will show all the entries with @id\'92s e.g. there will be multiple repeated entries as database saved each time console.db is run (via order1.save() line in console.db)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0  @first_name\cf3 \cb2 =\cf1 \cb2 [
+\f2\b \cf6 \cb2 "
+\f1\b0 [
+\f2\b \cf7 \\"
+\f1\b0 \cf6 Ned
+\f2\b \cf7 \\"
+\f1\b0 \cf6 , 
+\f2\b \cf7 \\"
+\f1\b0 \cf6 Stark
+\f2\b \cf7 \\"
+\f1\b0 \cf6 , 
+\f2\b \cf7 \\"
+\f1\b0 \cf6 frozen
+\f2\b \cf7 \\"
+\f1\b0 \cf6 , 40]
+\f2\b "
+\f1\b0 \cf1 \cb2 , 
+\f2\b \cf6 \cb2 "
+\f1\b0 Stark
+\f2\b "
+\f1\b0 \cf1 \cb2 , 
+\f2\b \cf6 \cb2 "
+\f1\b0 frozen
+\f2\b "
+\f1\b0 \cf1 \cb2 , 
+\f2\b \cf5 \cb2 40
+\f1\b0 \cf1 \cb2 ],\
+  @id\cf3 \cb2 =
+\f2\b \cf5 1
+\f1\b0 \cf1 \cb2 ,\
+  @last_name\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 Stark
+\f2\b "
+\f1\b0 \cf1 \cb2 ,\
+  @quantity\cf3 \cb2 =
+\f2\b \cf5 40
+\f1\b0 \cf1 \cb2 ,\
+  @topping\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 frozen
+\f2\b "
+\f1\b0 \cf3 >\cf1 \cb2 ,\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+when ruby console.db run\
+in pry type \'91order1\'92\
+will see:\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0  \cf3 \cb2 #<PizzaOrder:0x007fc53a3ba450\cf1 \cb2 \
+ @first_name\cf3 \cb2 =\cf1 \cb2 [
+\f2\b \cf6 \cb2 "
+\f1\b0 Ned
+\f2\b "
+\f1\b0 \cf1 \cb2 , 
+\f2\b \cf6 \cb2 "
+\f1\b0 Stark
+\f2\b "
+\f1\b0 \cf1 \cb2 , 
+\f2\b \cf6 \cb2 "
+\f1\b0 frozen
+\f2\b "
+\f1\b0 \cf1 \cb2 , 
+\f2\b \cf5 \cb2 40
+\f1\b0 \cf1 \cb2 ],\
+ @last_name\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 Stark
+\f2\b "
+\f1\b0 \cf1 \cb2 ,\
+ @quantity\cf3 \cb2 =
+\f2\b \cf5 40
+\f1\b0 \cf1 \cb2 ,\
+ @topping\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 frozen
+\f2\b "
+\f1\b0 \cf3 >
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+but typing order1.id gives\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 [7] pry(main)> order1.id\
+=> 
+\f2\b \cf4 \cb2 nil
+\f0\b0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+so we need to add some more to our sql = statement in the def save() function (pizza_order.rb) to get the id\
+\
+In pizza_order.rb\
+\
+# This code ensures that once the array comes back even though it only\
+# has one element (the id) it will be converted to an integer\
+    @id = db.exec(sql)\
+    first_result = result.first()\
+    id_to_set = first_result['id'].to_i\
+    @id = id_to_set\
+\
+in pry:\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 order2.first_name = 
+\f2\b \cf6 \cb2 "
+\f1\b0 steve
+\f2\b "
+\f1\b0 \cf1 \cb2 \
+=> 
+\f2\b \cf6 \cb2 "
+\f1\b0 steve
+\f2\b "
+\f1\b0 \cf1 \cb2 \
+[18] pry(main)> order2\
+=> \cf3 \cb2 #<PizzaOrder:0x007fc7f0a3ae98\cf1 \cb2 \
+ @first_name\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 steve
+\f2\b "
+\f1\b0 \cf1 \cb2 ,\
+ @last_name\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 Of Dragons
+\f2\b "
+\f1\b0 \cf1 \cb2 ,\
+ @quantity\cf3 \cb2 =
+\f2\b \cf5 2
+\f1\b0 \cf1 \cb2 ,\
+ @topping\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 well fired
+\f2\b "
+\f1\b0 \cf3 >
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 order2.first_name = 
+\f2\b \cf6 \cb2 "
+\f1\b0 The Mother
+\f2\b "\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b0 \cf6 The Mother
+\f2\b "
+\f1\b0 \cf1 \cb2 \
+[20] pry(main)> order2\
+=> \cf3 \cb2 #<PizzaOrder:0x007fc7f0a3ae98\cf1 \cb2 \
+ @first_name\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 The Mother
+\f2\b "
+\f1\b0 \cf1 \cb2 ,\
+ @last_name\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 Of Dragons
+\f2\b "
+\f1\b0 \cf1 \cb2 ,\
+ @quantity\cf3 \cb2 =
+\f2\b \cf5 2
+\f1\b0 \cf1 \cb2 ,\
+ @topping\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 well fired
+\f2\b "
+\f1\b0 \cf3 >
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+\
+Pizza Order class\
+\
+It is the responsibility of the pizza order class to find the orders so a find is needed in pizza_order.db\
+\
+Space cowboys lab commands\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 cd lab\
+ 3635  ll\
+ 3636  pwd\
+ 3637  touch bounty.rb\
+ 3638  subl bounty.rb\
+ 3639  createdb space_cowboys.db\
+ 3640  pwd\
+ 3641  l\
+ 3642  history\
+ 3643  ll\
+ 3644  psql -d space_cowboys\
+ 3645  psql -d space_cowboys.db\
+ 3646  l\
+ 3647  touch space_cowboys.sql\
+ 3648  subl space_cowboys.sql\
+ 3649  pwd\
+ 3650  ll\
+ 3651  psql -d space_cowboys.db -f space_cowboys\
+ 3652  psql -d space_cowboys.db -f space_cowboys.sql\
+ 3653  psql -d space_cowboys.db\
+ 3654  subl space_cowboys.sql\
+ 3655  l\
+ 3656  psql -d space_cowboys.db -f space_cowboys.sql\
+ 3657  psql -d space_cowboys.db\
+ 3658  psql -d space_cowboys.db -f space_cowboys.sql\
+ 3659  pwd\
+ 3660  ll\
+ 3661  touch space_console.rb\
+ 3662  subl space_console.rb\
+ 3663  ruby space_console.rb\
+ 3664  psql -d space_cowboys.db\
+ 3665  ruby space_console.rb\
+ 3666  psql -d space_cowboys.db\
+ 3667  ruby space_console.rb\
+ 3668  psql -d space_cowboys.db\
+ 3669  ruby space_console.rb\
+ 3670  ll\
+ 3671  pwd\
+ 3672  git init\
+ 3673  git add --all\
+ 3674  git commit -m "Week03 Day02 Space Cowboys SQL Lab"\
+ 3675  git remote add origin git@github.com:gulfstream15/Week03_Day01_Lab_SpaceCowboysSQL.git\
+ 3676  git push -u origin master\
+ 3677  pwd\
+ 3678  cd ..\
+ 3679  ll\
+ 3680  cd pizza_shop\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+Making classes communicate with each other\
+\
+From lab - bounty hunter can have a array of \'91bounties\'92 tables and a Bounty can be a hunter - use foreign keys to relate\
+\
+In the pizza lab 
+\f1 \cf1 \cb2 \CocoaLigature0 /Users/user/Desktop/CodeClan/Training/week03/day02/pizza_shop
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+\
+Class diagram:\
+\
+Customer 				Order			Toppings\
+first_name			customer  		name\
+last_name				topping	    		\
+					quantity	\
+\
+Database entity relationship diagram\
+\
+customer 				order			toppings\
+first_name			customer_id		name\
+last_name				topping_id			id\
+id					quantity		\
+\
+here a customer can have loads of orders\
+toppings can have loads of customers\
+many customers can have many toppings (many-to-many relationship)\
+\
+}

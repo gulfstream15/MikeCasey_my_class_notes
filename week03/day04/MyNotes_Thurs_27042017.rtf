@@ -1,0 +1,635 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Menlo-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red34\green79\blue188;\red88\green229\blue64;\red86\green219\blue233;
+\red0\green0\blue152;\red97\green0\blue1;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11120\viewh11960\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Week03 Day04\
+\
+Homework Talk Through\
+\
+localhost - refers to local machine this is replaced with an IP address or url for a remote machine.\
+\
+dropdb deletes the old star_wars database\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 dropdb star_wars\
+
+\f2\b \cf3 \uc0\u10140   \cf4 joins_one_to_many_jedi
+\f1\b0 \cf1  createdb star_wars\
+
+\f2\b \cf3 \uc0\u10140   \cf4 joins_one_to_many_jedi
+\f1\b0 \cf1  ls\
+
+\f2\b \cf3 \uc0\u10140   \cf4 joins_one_to_many_jedi
+\f1\b0 \cf1  touch jedi.sql\
+
+\f2\b \cf3 \uc0\u10140   \cf4 joins_one_to_many_jedi
+\f1\b0 \cf1  subl jedi.sql\
+
+\f2\b \cf3 \uc0\u10140   \cf4 joins_one_to_many_jedi
+\f1\b0 \cf1  ll\
+total 8\
+-rw-r--r--  1 user  staff   766B 27 Apr 10:00 jedi.sql\
+
+\f2\b \cf3 \uc0\u10140   \cf4 joins_one_to_many_jedi
+\f1\b0 \cf1  psql -d star_wars -f jedi.sql\
+psql:jedi.sql:1: ERROR:  table "lightsabers" does not exist\
+psql:jedi.sql:2: ERROR:  table "jedi" does not exist\
+CREATE TABLE\
+CREATE TABLE\
+INSERT 0 1\
+INSERT 0 1\
+INSERT 0 1\
+INSERT 0 1\
+INSERT 0 1\
+INSERT 0 1\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+Checking what is in the current tables\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 psql -d star_wars \
+psql (9.6.2)\
+Type "help" for help.\
+\
+star_wars=# SELECT * FROM jedi;\
+ id |  name  | darkside | age \
+----+--------+----------+-----\
+  1 | luke   | f        |  21\
+  2 | obiwan | f        |  33\
+  3 | moz    | f        |  10\
+(3 rows)\
+\
+star_wars=# SELECT * FROM lightsabers;\
+ id | colour | owner_id | hilt_metal \
+----+--------+----------+------------\
+  1 | green  |        1 | palladium\
+  2 | green  |        2 | gold\
+  3 | red    |        1 | hematite\
+(3 rows)\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+A middle (or inner join) join is where there are elements that are common to two tables - what is the same in both tables. Left and right joins are not used as much. Left is what is in Jedi table only, Right is what is in the lightsabers table only. \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 touch queries.sql
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+and add SELECT colour FROM lightsabers;\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 psql -d star_wars -f queries.sql
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+you need to update the queries.sql to say which table that join is coming from i.e.\
+\
+SELECT l.colour FROM lightsabers l; (where \'91l\'92 is an alias)\
+\
+to select a column from a left hand table (jedi) using an alias\
+\
+SELECT j.* FROM jedi j;\
+\
+Now we want to bring in the right hand table (lightsabers) using an alias (via an inner join)\
+\
+SELECT j.* FROM jedi j\
+INNER JOIN lightsabers l\
+ON j.id = l.owner_id;\
+\
+gives:\
+\
+
+\f2\b \cf3 \cb2 \CocoaLigature0  \cf4 joins_one_to_many_jedi
+\f1\b0 \cf1  psql -d star_wars -f queries.sql\
+ id |  name  | darkside | age \
+----+--------+----------+-----\
+  1 | luke   | f        |  21\
+  1 | luke   | f        |  21\
+  2 | obiwan | f        |  33\
+(3 rows)\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+Note moz has gone as he doesn\'92t have a lightsaber\
+\
+adding a l.* to the select:\
+\
+SELECT j.*, l.* FROM jedi j\
+INNER JOIN lightsabers l\
+ON j.id = l.owner_id;\
+\
+\'91id\'92 above is the primary key and \'91owner_id\'92 is the foreign key? Check\
+\
+gives the two tables together:\
+\
+
+\f2\b \cf4 \cb2 \CocoaLigature0 joins_one_to_many_jedi
+\f1\b0 \cf1  psql -d star_wars -f queries.sql\
+ id |  name  | darkside | age | id | colour | owner_id | hilt_metal \
+----+--------+----------+-----+----+--------+----------+------------\
+  1 | luke   | f        |  21 |  3 | red    |        1 | hematite\
+  1 | luke   | f        |  21 |  1 | green  |        1 | palladium\
+  2 | obiwan | f        |  33 |  2 | green  |        2 | gold\
+(3 rows)
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+It is unlikely that we want all information - we often want to be selective:\
+SELECT j.name, l.colour FROM jedi j   # look to see if the column in the left table (jedi) is \
+INNER JOIN lightsabers l			   # has a reference in the right table (lightsabers)\
+ON j.id = l.owner_id;                              # this line does the comparison\
+\
+
+\f2\b \cf4 \cb2 \CocoaLigature0 joins_one_to_many_jedi
+\f1\b0 \cf1  psql -d star_wars -f queries.sql\
+  name  | colour \
+--------+--------\
+ luke   | red\
+ luke   | green\
+ obiwan | green s\
+(3 rows)
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+NOTE: You have to create another alias to make another join - you can\'92t use the old one.\
+\
+For a left join you show everything:\
+\
+SELECT j.*, l.* FROM jedi j\
+LEFT JOIN lightsabers l\
+ON j.id = l.owner_id;\
+\
+with BOTH inner join and left join queries in you get:\
+\
+
+\f2\b \cf4 \cb2 \CocoaLigature0 joins_one_to_many_jedi
+\f1\b0 \cf1  psql -d star_wars -f queries.sql\
+  name  | colour \
+--------+--------\
+ luke   | red\
+ luke   | green\
+ obiwan | green\
+(3 rows)\
+\
+ id |  name  | darkside | age | id | colour | owner_id | hilt_metal \
+----+--------+----------+-----+----+--------+----------+------------\
+  1 | luke   | f        |  21 |  3 | red    |        1 | hematite\
+  1 | luke   | f        |  21 |  1 | green  |        1 | palladium\
+  2 | obiwan | f        |  33 |  2 | green  |        2 | gold\
+  3 | moz    | f        |  10 |    |        |          | \
+(4 rows)\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+The most import join is an INNER JOIN. \
+\
+Zombies - many to many example\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 dropdb zombie_apocalypse
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+
+\f2\b \cf3 \cb2 \CocoaLigature0  \cf4 join_many_to_many_zombies
+\f1\b0 \cf1  createdb zombies\
+
+\f2\b \cf3 \uc0\u10140   \cf4 join_many_to_many_zombies
+\f1\b0 \cf1  subl .\
+
+\f2\b \cf3 \uc0\u10140   \cf4 join_many_to_many_zombies
+\f1\b0 \cf1  psql -d zombies -f zombies.sql
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+queries.sql\
+\
+1) get all the data from the left victims table \
+\
+SELECT v.* FROM victims v;\
+\
+to check all ok\
+\
+
+\f2\b \cf3 \cb2 \CocoaLigature0 \uc0\u10140   \cf4 join_many_to_many_zombies
+\f1\b0 \cf1  psql -d zombies -f queries.sql\
+\
+id |  name   | run_speed \
+----+---------+-----------\
+  1 | Alex    |        12\
+  2 | Gillian |        11\
+  3 | Johnny  |        15\
+  4 | Paul    |        30\
+(4 rows)\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+now get the data from the right bitings table\
+\
+SELECT v.* FROM victims v \
+INNER JOIN bitings b\
+ON b.victim_id = v.id; \
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 psql -d zombies -f queries.sql\
+ id |  name   | run_speed \
+----+---------+-----------\
+  1 | Alex    |        12\
+  2 | Gillian |        11\
+  3 | Johnny  |        15\
+  3 | Johnny  |        15\
+(4 rows)\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+If you do this:\
+\
+SELECT v.*, b.* FROM victims v \
+INNER JOIN bitings b\
+ON b.victim_id = v.id; \
+\
+you get:\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\b \cf4 \cb2 \CocoaLigature0 join_many_to_many_zombies
+\f1\b0 \cf1  psql -d zombies -f queries.sql\
+ id |  name   | run_speed | id | victim_id | zombie_id | infected_on \
+----+---------+-----------+----+-----------+-----------+-------------\
+  1 | Alex    |        12 |  1 |         1 |         1 | 2017-03-27\
+  2 | Gillian |        11 |  2 |         2 |         2 | 2017-03-29\
+  3 | Johnny  |        15 |  3 |         3 |         4 | 2017-03-30\
+  3 | Johnny  |        15 |  4 |         3 |         1 | 2017-03-30\
+(4 rows)
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+here the id/name/run_speed columns come from the victims table and the id/victim_id/zombie_id/infected_on is from the \'91bitings\'92 table.\
+\
+Refer to notebook for diagram on joins between victims/bitings and zombies tables. \
+\
+SELECT v.*, b.* FROM victims v \
+INNER JOIN bitings b\
+ON b.victim_id = v.id \
+INNER JOIN zombies z\
+ON z.id = b.zombie_id;\
+\
+now if we add the z.* to give\
+\
+SELECT v.*, b.*, z.* FROM victims v \
+INNER JOIN bitings b\
+ON b.victim_id = v.id \
+INNER JOIN zombies z\
+ON z.id = b.zombie_id;\
+\
+we get:\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 psql -d zombies -f queries.sql\
+\
+ id |  name   | run_speed | id | victim_id | zombie_id | infected_on | id | name  |  type   \
+----+---------+-----------+----+-----------+-----------+-------------+----+-------+---------\
+  1 | Alex    |        12 |  1 |         1 |         1 | 2017-03-27  |  1 | Craig | crawler\
+  2 | Gillian |        11 |  2 |         2 |         2 | 2017-03-29  |  2 | Sandy | runner\
+  3 | Johnny  |        15 |  3 |         3 |         4 | 2017-03-30  |  4 | Simon | tank\
+  3 | Johnny  |        15 |  4 |         3 |         1 | 2017-03-30  |  1 | Craig | crawler\
+(4 rows)\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+now we just want the name of the victim, the name of the zombie and the date they were bitten on:\
+\
+SELECT v.name, b.infected_on, z.name FROM victims v \
+INNER JOIN bitings b\
+ON b.victim_id = v.id \
+INNER JOIN zombies z\
+ON z.id = b.zombie_id;\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 psql -d zombies -f queries.sql\
+  name   | infected_on | name  \
+---------+-------------+-------\
+ Alex    | 2017-03-27  | Craig\
+ Gillian | 2017-03-29  | Sandy\
+ Johnny  | 2017-03-30  | Simon\
+ Johnny  | 2017-03-30  | Craig\
+(4 rows)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+Learning objectives\
+\
+know how to represent many to many relationships in Ruby\
+Be able to use inner joins from Ruby\
+\
+\
+in quest_advisor:\
+\
+CASCADE means once deleted then delete all subsequent links?\
+and it doesn\'92t matter which order the DROP\'92s are at top of file if\
+CASCADE is used. \
+\
+DROP TABLE visits:\
+DROP TABLE users;\
+DROP TABLE locations;\
+\
+(or visits TABLE)\
+\
+ user_id INT4 REFERENCES users(id) ON DELETE CASCADE,\
+ review TEXT  - this means unlimited entry for texts as reviews can be large\
+\
+ruby db/console.db\
+\
+to test in pry\
+\
+visit1.location_id\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 visit1\
+=> \cf3 \cb2 #<Visit:0x007fdf9c0d38a0\cf1 \cb2  @id\cf3 \cb2 =
+\f2\b \cf5 1
+\f1\b0 \cf1 \cb2 , @location_id\cf3 \cb2 =
+\f2\b \cf5 1
+\f1\b0 \cf1 \cb2 , @review\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 0 stars, far too hot
+\f2\b "
+\f1\b0 \cf1 \cb2 , @user_id\cf3 \cb2 =
+\f2\b \cf5 1
+\f1\b0 \cf3 >\cf1 \cb2 \
+[3] pry(main)> visit1.location_id\
+=> 
+\f2\b \cf5 \cb2 1
+\f1\b0 \cf1 \cb2 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+but we want to do visit1.location. in visit.rb:\
+\
+def location()\
+    sql = "SELECT * FROM locations WHERE id = #\{location_id\}"\
+    location = SqlRunner.run(sql).first\
+    Location.new(location)\
+  end\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 visit1.location()\
+=> \cf3 \cb2 #<Location:0x007fcee3094cf0\cf1 \cb2  @category\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 Attractions
+\f2\b "
+\f1\b0 \cf1 \cb2 , @id\cf3 \cb2 =
+\f2\b \cf5 3
+\f1\b0 \cf1 \cb2 , @name\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 Mordor
+\f2\b "
+\f1\b0 \cf3 >\cf1 \cb2 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+def user()\
+    sql = "SELECT * FROM users WHERE id = #\{user_id\}"\
+    user = SqlRunner.run(sql).first\
+    User.new(user)\
+  end \
+\
+ then ruby db/seeds.rb\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\b \cf3 \cb2 \CocoaLigature0 \uc0\u10140   \cf4 \cb2 quest_advisor_start
+\f1\b0 \cf1  ruby db/seeds.rb\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 visit1.user()\
+=> \cf3 \cb2 #<User:0x007f96849c9a88\cf1 \cb2  @id\cf3 \cb2 =
+\f2\b \cf5 5
+\f1\b0 \cf1 \cb2 , @name\cf3 \cb2 =
+\f2\b \cf6 "
+\f1\b0 Samwise Gamgee
+\f2\b "
+\f1\b0 \cf3 >
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+I have a location and i want to see users that have visited that location so in user table and look at location.\
+\
+To check what guest_advisor has:\
+\
+It is worth writing the SQL code to check before putting it in the location.db file:\
+\
+
+\f1 \cf1 \cb2 \CocoaLigature0 psql -d quest_advisor\
+psql (9.6.2)\
+Type "help" for help.\
+\
+quest_advisor=# SELECT * from users;\
+ id |      name      \
+----+----------------\
+  5 | Samwise Gamgee\
+  6 | Gollum\
+(2 rows)\
+\
+quest_advisor=# SELECT locations.* FROM locations \
+quest_advisor-# INNER JOIN visits ON visits.location_id = locations.id\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+The code below gets all the locations for a given user id (where id = 5) - check SQL within sql\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 SELECT locations.* FROM locations \
+quest_advisor-# INNER JOIN visits ON visits.location_id = locations.id\
+quest_advisor-# WHERE user_id = 5;\
+ id |   category   |   name   \
+----+--------------+----------\
+  5 | Attractions  | Mordor\
+  6 | Places To Go | Hobbiton\
+(2 rows)\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+To check what guest_advisor has:\
+\
+cut and paste code into user.db files\
+\
+def locations()\
+    sql = "SELECT locations.* FROM locations\
+           INNER JOIN visits ON visits.location_id = locations.id\
+           WHERE user_id = #\{@id\};"\
+    results = SqlRunner.run(sql)\
+    return results.map \{|location| Location.new(location) \}\
+  end\
+\
+To test:\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 ruby db/seeds.rb \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\b \cf1 \cb2 From:
+\f1\b0 \cb2  /Users/user/Desktop/CodeClan/Training/week03/day04/quest_advisor_start/db/seeds.rb @ line 29 :\
+\
+    
+\f2\b \cf5 \cb2 24
+\f1\b0 \cf1 \cb2 : visit2.save()\
+    
+\f2\b \cf5 \cb2 25
+\f1\b0 \cf1 \cb2 : visit3 = 
+\f2\b \cf5 \cb2 \ul \ulc5 Visit
+\f1\b0 \cf1 \ulnone .new(\{ 
+\f2\b \cf6 '
+\f1\b0 user_id
+\f2\b '
+\f1\b0 \cf1  => user1.id, 
+\f2\b \cf6 '
+\f1\b0 location_id
+\f2\b '
+\f1\b0 \cf1  => location2.id, 
+\f2\b \cf6 '
+\f1\b0 review
+\f2\b '
+\f1\b0 \cf1  => 
+\f2\b \cf6 '
+\f1\b0 4 stars, plenty of beer available
+\f2\b '
+\f1\b0 \cf1 \})\
+    
+\f2\b \cf5 26
+\f1\b0 \cf1 : visit3.save()\
+    
+\f2\b \cf5 27
+\f1\b0 \cf1 : \
+    
+\f2\b \cf5 28
+\f1\b0 \cf1 : binding.pry\
+ => 
+\f2\b \cf5 29
+\f1\b0 \cf1 : 
+\f2\b \cf4 nil
+\f1\b0 \cf1 \
+\
+[1] pry(main)> \
+[2] pry(main)> \
+[3] pry(main)> \
+[4] pry(main)> \
+[5] pry(main)> user1.locations\
+=> [\cf3 #<Location:0x007f911c13ec78\cf1  @category\cf3 =
+\f2\b \cf6 "
+\f1\b0 Attractions
+\f2\b "
+\f1\b0 \cf1 , @id\cf3 =
+\f2\b \cf5 7
+\f1\b0 \cf1 , @name\cf3 =
+\f2\b \cf6 "
+\f1\b0 Mordor
+\f2\b "
+\f1\b0 \cf3 >\cf1 ,\
+ \cf3 #<Location:0x007f911c13e368\cf1  @category\cf3 =
+\f2\b \cf6 "
+\f1\b0 Places To Go
+\f2\b "
+\f1\b0 \cf1 , @id\cf3 =
+\f2\b \cf5 8
+\f1\b0 \cf1 , @name\cf3 =
+\f2\b \cf6 "
+\f1\b0 Hobbiton
+\f2\b "
+\f1\b0 \cf3 >\cf1 ]
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+Now if you want to check the number of users associated with a location (in location.db)\
+\
+def users()\
+    sql = "SELECT users.* FROM users\
+           INNER JOIN visits ON visits.user_id = users.id\
+           WHERE location_id = #\{@id\};"\
+    results = SqlRunner.run(sql)\
+    return results.map \{|user| User.new(user) \}\
+  end\
+\
+Testing:\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 ruby db/seeds.rb\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\b \cf1 \cb2 From:
+\f1\b0 \cb2  /Users/user/Desktop/CodeClan/Training/week03/day04/quest_advisor_start/db/seeds.rb @ line 29 :\
+\
+    
+\f2\b \cf5 \cb2 24
+\f1\b0 \cf1 \cb2 : visit2.save()\
+    
+\f2\b \cf5 \cb2 25
+\f1\b0 \cf1 \cb2 : visit3 = 
+\f2\b \cf5 \cb2 \ul \ulc5 Visit
+\f1\b0 \cf1 \ulnone .new(\{ 
+\f2\b \cf6 '
+\f1\b0 user_id
+\f2\b '
+\f1\b0 \cf1  => user1.id, 
+\f2\b \cf6 '
+\f1\b0 location_id
+\f2\b '
+\f1\b0 \cf1  => location2.id, 
+\f2\b \cf6 '
+\f1\b0 review
+\f2\b '
+\f1\b0 \cf1  => 
+\f2\b \cf6 '
+\f1\b0 4 stars, plenty of beer available
+\f2\b '
+\f1\b0 \cf1 \})\
+    
+\f2\b \cf5 26
+\f1\b0 \cf1 : visit3.save()\
+    
+\f2\b \cf5 27
+\f1\b0 \cf1 : \
+    
+\f2\b \cf5 28
+\f1\b0 \cf1 : binding.pry\
+ => 
+\f2\b \cf5 29
+\f1\b0 \cf1 : 
+\f2\b \cf4 nil
+\f1\b0 \cf1 \
+\
+[1] pry(main)> location1.users()\
+=> [\cf3 #<User:0x007fb9c3143af0\cf1  @id\cf3 =
+\f2\b \cf5 11
+\f1\b0 \cf1 , @name\cf3 =
+\f2\b \cf6 "
+\f1\b0 Samwise Gamgee
+\f2\b "
+\f1\b0 \cf3 >\cf1 ,\
+ \cf3 #<User:0x007fb9c3143a28\cf1  @id\cf3 =
+\f2\b \cf5 12
+\f1\b0 \cf1 , @name\cf3 =
+\f2\b \cf6 "
+\f1\b0 Gollum
+\f2\b "
+\f1\b0 \cf3 >\cf1 ]
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+Refactoring - our code in user.rb and location.rb so we can write a function. In user.db\
+\
+get me lots of users by running a SQL query in a User.get_many(sql) function\
+\
+}

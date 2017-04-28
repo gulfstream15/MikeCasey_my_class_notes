@@ -1,0 +1,172 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red34\green79\blue188;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\})}{\leveltext\leveltemplateid1\'02\'00);}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww12620\viewh10440\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Week03 Day01\
+\
+HomeWork Feedback\
+\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	1)	}The hard coding in my room class can be removed - the room class knows about itself so no need to refer to it.\
+{\listtext	2)	}Avoid passing \'91room\'92 into tests just initialise all variables and refer to them instead\
+{\listtext	3)	}Make the room class similar to the guest class\
+{\listtext	4)	}Can make the names shorter but at this stage if you want longer names that is ok\
+{\listtext	5)	}The class diagram in xml is not readable to do a screen shot\
+{\listtext	6)	}All functionality there ok\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+Databases & SQL Intro (Structured Query Language)\
+\
+Know what Databases are\
+Know what SQL is\
+Understand CRUD actions \
+Create	INSERT INTO\
+Read 	SELECT\
+Update	UPDATE	\
+Delete	DELETE\
+Know how to create relationships\
+\
+Note the ; - it finishes the command\
+\
+sql command\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 CREATE DATABASE star_wars;\
+CREATE DATABASE\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+SQL				Ruby\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 VARCHAR 		String\
+INT				Integer\
+BOOLEAN		True/False\
+\
+\'97 (two dashes) for comments\
+\
+to come out of sql type \\q\
+\
+touch jedi.sql\
+\
+edit this file \
+\
+CREATE TABLE jedi (\
+  name VARCHAR(255),\
+  age  INT2,\
+  darkside BOOLEAN\
+);\
+\
+then create the database\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 psql -d star_wars -f jedi.sql
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+sql\
+\\c star_wars   to connect to star_wars database		\
+\\d+ star_wars to see details\
+\\q to come out of psql and back to prompt \
+\
+If you know try and create the database again via \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 psql -d star_wars -f jedi.sql
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+it will fail so need to add the line\
+\
+DROP TABLE jedi;\
+\
+to remove the old version and start afresh but also still be able to use the commands CREATE TABLE, etc.\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+-- SELECT name FROM jedi;\
+-- SELECT COUNT(*) FROM jedi;\
+\
+-- UPDATE jedi SET darkside = true;\
+\
+In order to be able to selectively apply commands to individual entries we need to introduce id\'92s e.g.\
+\
+ id SERIAL4 (an integer)\
+\
+this automatically sets id\'92s for each entry\
+\
+PK = primary key\
+FK = foreign key (as it contains a reference to a primary key in an other table)\
+\
+In the table for lightsabers:\
+\
+owner_id INT4 REFERENCES jedi(id)  (t\
+\
+This is a foreign key in the lightsabers table that references the jedi table\
+\
+Below owner_id is ok as long as it makes sense but convention is <user>.id for owner name e.g. jedi_id\
+as opposed to owner_id\
+\
+owner_id INT4 REFERENCES jedi(id)\
+\
+-- Note here we have to drop lightsabers first \
+-- then the jedi as lightsabers does not have\
+-- any dependency\
+DROP TABLE lightsabers;\
+DROP TABLE jedi;\
+\
+1-many relationship between foreign keys and primary keys\
+\
+Any errors - first look for any commas and semi-colons that are missing \
+\
+Lab (extension)\
+\
+Create a bitings table to keep a track of whose been bitten\
+\
+DROP TABLE bitings\
+\
+CREATE TABLE bitings (\
+id SERIAL8 PRIMARY KEY,\
+victim_id INT8 REFERENCES victims(id)\
+zombie_id INT8 REFERENCES zombies(id)\
+infected_on DATE NOT NULL\
+);\
+\
+The following lines will create a DATE object in the TABLE bitings \
+\
+INSERT INTO bitings (zombie_id, victim_id, infected_on)\
+VALUES(1, 1, \'91April 24 2017\'92);\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 INSERT INTO bitings (zombie_id, victim_id, infected_on)\
+VALUES(2, 2, \'91April 25 2017\'92);\
+\
+INSERT INTO bitings (zombie_id, victim_id, infected_on)\
+VALUES(3, 3, \'91April 25 2017\'92);\
+\
+SELECT * FROM bitings\
+\
+SELECT victim_id FROM bitings WHERE\
+  zombie_id =1;\
+\
+will output \
+\
+id victim_id zombie_id infected_on\
+ 1        1          1            2017-04-24\
+\
+In marvel.sql make the changes you need to get the questions answered and run the sql file again via psql to see what\
+your changes have done. When happy cut and paste your code to answer each question underneath in the homework.md file.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 /Users/user/Desktop/CodeClan/HomeWork/week03/day01/cinema_crud_sql_hw
+\f0 \cf0 \cb1 \CocoaLigature1 \
+}
