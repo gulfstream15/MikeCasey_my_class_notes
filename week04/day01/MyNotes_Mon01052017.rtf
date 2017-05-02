@@ -1,0 +1,289 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\froman\fcharset0 Times-Roman;
+\f3\fswiss\fcharset0 ArialMT;}
+{\colortbl;\red255\green255\blue255;\red34\green79\blue188;\red0\green0\blue0;\red72\green72\blue72;
+\red254\green254\blue254;\red218\green225\blue228;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14660\viewh10800\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Week04 Day01\
+\
+Learning Objects\
+\
+Web programming\
+HTTP + HTML\
+Request/response cycle\
+\
+using HyperText Transfer Protocol\
+we send HyperText Markup Language/PDF\'92s, JS, JSON (just data)\
+\
+Web Framework - Sinatra - handles the HTTP complexity of how a website actually works\
+Sinatra is a bunch of Ruby code that sits on the server with SQL code embedded in it.\
+The client receives the HMTL and CSS from the server (via a browser). We have looked at the \
+data/server relationship in week 03. Now we are looking at the code in HTML/CSS/Sinatra\
+to put the data onto a webpage.\
+\
+Refer to 7 restful routes sheet on wall in classroom:\
+ \
+read via subject (GET) e.g http://bbc.co.uk\
+submit a form (POST) \
+create via subject/new (GET)\
+\
+Go onto a website e.g. BBC and hold down ctrl then touchpad will get a window with \'91Inspect\'92 - can then\
+see the workings of the webpage.\
+\
+5.12.3 (major version.minor version.patch version) - semantic versioning - bumping up code - code release.  \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 gem install sinatra\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+touch app.rb\
+\
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/hi"}}{\fldrslt http://localhost:4567/hi}}\
+\
+if app.rb is changed use ctr/c to come out of sinatra\
+then ruby app.rb\
+\
+then type in {\field{\*\fldinst{HYPERLINK "http://localhost:4567/hi"}}{\fldrslt http://localhost:4567/hi}} in the bowser will get in the browser window:\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\f2 \cf3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 Hello World! \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \kerning1\expnd0\expndtw0 \CocoaLigature0 \outl0\strokewidth0 gem install sinatra-contrib\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+with this line in app.rb:\
+\
+require('sinatra/contrib/all')\
+\
+then ruby app.rb \
+\
+then in the browser refresh the {\field{\*\fldinst{HYPERLINK "http://localhost:4567/hi"}}{\fldrslt http://localhost:4567/hi}} page \
+\
+can then change the code e.g. Hello mike or:\
+\
+require('sinatra')\
+require('sinatra/contrib/all')\
+\
+get '/roll-dice' do\
+  "Rolling dice...#\{rand(1...7)\}"\
+end\
+\
+then re-reun ruby code with ruby app.rb\
+\
+then go into browser:\
+\
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/roll-dice"}}{\fldrslt http://localhost:4567/roll-dice}}\
+\
+To see e.g. \cf3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 Rolling dice...6\
+\
+Then on web page two fingers on touch pad or ctrl/any key and then go to inspect\
+\
+to see stats on web page refresh the page\
+\
+Dynamic information can also be passed in.\
+\
+In app.rb\
+\
+get '/name/:first/:last' do \
+  return params.to_s()\
+end\
+\
+In browser:\
+\
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/name/simon/douglas"}}{\fldrslt http://localhost:4567/name/simon/douglas}}\
+\
+will get:\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+\cf3 \{"splat"=>[], "captures"=>["simon", "douglas"], "first"=>"simon", "last"=>"douglas"\}\
+\
+Modifying the ruby.db\
+\
+get '/name/:first/:last' do \
+  return "Your name is #\{params[:first]\} #\{params[:last]\}"\
+end\
+\
+and on web page: {\field{\*\fldinst{HYPERLINK "http://localhost:4567/name/simon/douglas"}}{\fldrslt http://localhost:4567/name/simon/douglas}} refresh will get:\
+\
+Your name is simon douglas\
+\
+Add a function to the app.rb code:\
+\
+get 'friend/:number' do\
+  friends = ["Joey", "Phoebe", "Monica", "Chandler", "Rachel", "Ross"]\
+  index = params["number"].to_i() - 1 \
+  return friends[index]\
+end\
+\
+where \'91- 1\'92 means get the first element in the array\
+\
+get '/square/:num' do\
+  num = params[:num].to_i()\
+  return num * num\
+end\
+\
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/square/2"}}{\fldrslt http://localhost:4567/square/2}} gives nothing as need to send back as a string:\
+\
+get '/square/:num' do\
+  num = params[:num].to_i()\
+  return (num * num).to_s()\
+end\
+\
+and {\field{\*\fldinst{HYPERLINK "http://localhost:4567/square/2"}}{\fldrslt \cf0 \outl0\strokewidth0 http://localhost:4567/square/2}}\cf0 \outl0\strokewidth0   will show 4.\cf3 \outl0\strokewidth0 \strokec3 \
+
+\f2 \
+Note:\
+\
+If two dynamic inputs are the same sinatra just take the first one and the second one is ignored\
+\
+get '/pet/:hello' do \
+  "hello pet"  \
+end\
+\
+get "/pet/:name" do\
+   "hello #\{params[:name]\}"\
+end\
+\
+e.g {\field{\*\fldinst{HYPERLINK "http://localhost:4567/pet/polly"}}{\fldrslt http://localhost:4567/pet/polly}}\
+\
+the above will just show\'92Hello Pet\'94 and not the name polly as the first function is carried out. \
+\
+Software Architecture - MVC Pattern\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+\cf0 \outl0\strokewidth0 In Java single responsibility pattern\cf3 \outl0\strokewidth0 \strokec3 \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf3 \
+Model View Controller\
+\
+Model - is the application logic (the business logic)\
+View - the bit the user sees (HTML/CSS, etc - mostly no Ruby code) \
+Controller - joins model and view together e.g. Sinatra it returned string in the example above - it waits for user input and responds to it.\
+\
+sinatra_calc_start\
+\
+touch a controller.db\
+\
+require ('sinatra')\
+require ('sinatra/contrib/all')\
+require ('pry-byebug')\
+\
+get '/add/:num1/:num2' do\
+  "Hello"\
+end\
+\
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/add/1/2"}}{\fldrslt http://localhost:4567/add/1/2}}  gives \'93Hello\'94\
+\
+In controller.db\
+\
+get '/add/:num1/:num2' do\
+  num1 = params[:num1].to_i()\
+  num2 = params[:num2].to_i()\
+  calculator = Calculator.new(num1, num2)\
+  return "#\{calculator.add()\}"\
+end\
+\
+gives in browser:\
+\
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/add/1/2"}}{\fldrslt http://localhost:4567/add/1/2}}\
+\
+3\
+\
+The above code is called a \'91route\'92. \
+\
+\pard\pardeftab720\sl420\partightenfactor0
+
+\f3\fs36 \cf4 \cb5 \strokec4 UXPin account 
+\f2\fs24 \cf3 \cb1 \strokec3 \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf3 \
+\pard\pardeftab720\sl540\partightenfactor0
+
+\f3\fs36 \cf4 \cb6 \strokec4 Login: {\field{\*\fldinst{HYPERLINK "https://u4489520.ct.sendgrid.net/wf/click?upn=Fmq5JULHavWcQR2Oy6JuFsve9QdOqs2lxyuEGzrm8SE-3D_hcaYNR3FWHnhbf7fikm8ldQzD3suouZoD8lz-2Bw3Xmn-2FDzISuW76KERcnYaMtRNtfh4ZMRAFyeSqV6O2SGRRpcCT734jxXExz5URjPh7nStfFHY2-2F1-2BWRxEYvW-2B-2Fpg8ozvZZXee167CyMwbE8wwI4X9g-2BLriiaFJ4-2F-2FFaI7mkQ-2F8z365GMSwFQOXLOzV6EENM4WqVpd8eDhrwhH5d6gqAXtyLdS-2BjBvEplhNpkVBKT7U-3D"}}{\fldrslt 
+\b \cf3 \strokec3 mikecasey2210@gmail.com}}\
+Your temporary password: 
+\b \cf3 \strokec3 AXMg9VZY
+\f2\b0\fs24 \cb1 \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf3 \
+err - embedded ruby file - a file with ruby that will build the HTML we need i.e it is a template that replaces the ruby with text that represents\
+the HTML.\
+\
+touch an result. erb file:\
+\
+<h1>the result is <%= @calculation %> </h1>\
+\
+everything between  \cf0 \outl0\strokewidth0 <%=  %> tags will be ruby i.e. embedded ruby. The nickname for <%= is ice cream cone.\cf3 \outl0\strokewidth0 \strokec3 \
+\
+This \cf0 \outl0\strokewidth0 <%=  %>  means take the value within and put it in the file e.g. for an array of users e.g.\
+ <% @users.each do |user| %>\
+<%= some embedded Ruby in here %>\
+\pard\pardeftab720\sl280\partightenfactor0
+\cf0  <% end %>\
+\pard\pardeftab720\sl280\partightenfactor0
+\cf0 \
+in the result.erb type:\
+<h1>the result is <%= @calculation %> </h1>\
+\
+Avoid using comments in the embedded Ruby as connecting code can get confused\
+\
+In the controller.rb:\
+\
+get '/add/:num1/:num2' do\
+  num1 = params[:num1].to_i()\
+  num2 = params[:num2].to_i()\
+  calculator = Calculator.new(num1, num2)\
+  @calculation = calculator.add()		# Note here that the @ here is SINATRA                         \
+  erb(:result)					# notation and not an instance variable\
+end\
+\
+Note here that the \'91result\'92 in erb(:result) has to be the name of the era file in the /views directory.\
+\
+running the ruby controller.rb gives:\
+\
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/add/123/456"}}{\fldrslt http://localhost:4567/add/123/456}}\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\b\fs28 \cf3 \outl0\strokewidth0 \strokec3 the result is 579\
+
+\b0\fs24 \
+Sinatra using layouts as a template to show content\
+Note in the layout page for css:\
+  <link rel='stylesheet' href='/style.css'>         NOTE  / BEFORE style.css - has to be in!!\
+\
+get '/add/:num1/:num2' do  - this is called a dynamic path\
+\
+Once you have made a change to controller or any ruby code run the ruby controller.rb each time to check the browser output\
+Let Sinatra show you the error and drive the development e.g. \
+\
+get '/' do\
+  erb(:home)\
+end\
+\
+get '/about-us' do\
+  erb(:about)\
+end\
+ \
+The code above was copied and pasted from the webpage output then we created home.erb and about.erb code to\
+use this.
+\b\fs48 \
+\pard\pardeftab720\sl280\partightenfactor0
+
+\b0\fs24 \cf0 \outl0\strokewidth0 \
+Homework\
+\
+Create a Games class. Follow the lab. The amount of logic in the controller is one line - same as lab.\
+We can TDD the game class as no database. TDD encouraged.\
+\
+Worth putting in logic README\'92s into my repo\'92s.  \
+}
