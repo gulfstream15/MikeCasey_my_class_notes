@@ -1,0 +1,596 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 HelveticaNeue;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\froman\fcharset0 Times-Roman;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red27\green31\blue34;\red215\green219\blue223;
+\red244\green246\blue249;\red34\green79\blue188;\red0\green0\blue233;\red117\green117\blue117;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14080\viewh10140\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs36 \cf0 Week04 Day03\
+
+\b0\fs24 \
+
+\b\fs28 Homework Work Through\
+\
+
+\b0 Cannot do a localhost/pizzas/1/delete with a post - these are only for get\'92s\
+\
+So for delete:\
+find the pizza\
+run the existing delete() route\
+\
+# DESTROY DELETE\
+post '/pizzas/:id/delete' do\
+  @pizza = Pizza.find( params[:id] )\
+  @pizza.delete()\
+  erb( :destroy)\
+end\
+\
+The destroy.erb is just a confirmation line:\
+\
+<h3> <%= @pizza.pretty_name() %> Your order has been successfully deleted</h3>\
+\
+in the show.erb must have a form for the post (see RESTful table for delete) \
+\
+<form method="POST" action="/pizzas/<%= @pizza.id %>/detele">   \
+<input type="submit" name = "delete" value="Delete Order">\
+</form>\
+\
+in pizza_controller.rb the id is the id of the current pizza i.e. a specific pizza\
+\
+in show.erb:\
+when looking at the page information via page inspect (two fingers on touch pad->inspect)\
+<form method=\'93POST\'94 action=\'93/pizza/4/delete\'94> where 4 is @pizza.id\
+
+\b \
+ DESTROY DELETE\
+post '/pizzas/:id/delete' do\
+  # id here is one specific pizza\
+  @pizza = Pizza.find( params[:id] )\
+  @pizza.delete()\
+  # For debugging can be useful to use:\
+  # puts @pizza.delete()\
+  # this can also be used INSTEAD of destroy.erb\
+  # redirect('/pizzas')   
+\b0 # this line says put \'91/localhost:4567/pizzas\'92 in the browser to redirect user
+\b \
+  erb( :destroy)\
+end\
+
+\b0\fs24 \
+in the pizza_controller.rb for update:\
+\
+#UPDATE\
+post 'pizzas/:id' do \
+  puts params.inspect()\
+  @pizza = Pizza.new( params )\
+  pizza.update()\
+  redirect("/pizzas/#\{params[:id]\}")\
+end\
+\
+the id in the above class sets the id in teh in the pizza.rb class:\
+\
+ def update()\
+    sql = "UPDATE pizzas SET\
+      first_name = '#\{ @first_name \}',\
+      last_name = '#\{ @last_name \}',\
+      topping = '#\{ @topping \}',\
+      quantity = '#\{ @quantity \}'\
+      WHERE id = '#\{ @id \}';"\
+    SqlRunner.run( sql )\
+  end\
+\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\b\fs36 \cf2 \expnd0\expndtw0\kerning0
+Sinatra Pizza Shop\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\b0\fs24 \cf2 \
+Make a RESTful CRUD app with one resource\
+Understand which HTTP verbs to use\
+understand HTML forms + POST requests\
+\
+REST is the convention for laying out the site - an approach which makes websites behave as they should. Users know what will happen in a url. REST - Representation State Transfer.\
+\
+Operation		RESTful\
+Create		POST\
+Read			GET\
+Update		POST (PATCH)\
+Delete			POST (DELETE)\
+\
+We are taking the pizza_shop example and making the project sinatra based.\
+\
+in 
+\b pizza_controller.rb
+\b0  we put in the code for the CRUD actions - the back end. \
+URL			Action			CRUD Verb\
+/photos		index			(READ)\
+/photos/new		new			(CREATE) (form)\
+/photos		create			(CREATE)\
+/photos/:id		show			(READ)\
+/photos		edit			(UPDATE) (form)\
+/photos		update		(UPDATE)\
+/photos		destroy		(DELETE)\
+\
+\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat1 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat1 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat1 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+
+\f1\b\fs32 \cf3 VERB\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 PATH\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 ACTION\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat1 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat1 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat1 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+
+\b0 \cf3 GET\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 /pizzas\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 index\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat5 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat5 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat5 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 GET\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 /pizzas/:id\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 show\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat1 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat1 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat1 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 GET\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 /pizzas/new\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 new\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat5 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat5 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat5 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 POST\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 /pizzas\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 create\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat1 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat1 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat1 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 GET\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 /pizzas/:id/edit\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 edit\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat5 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat5 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat5 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 POST\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 /pizzas/:id\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 update\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat1 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat1 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat1 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf4 \clbrdrl\brdrs\brdrw20\brdrcf4 \clbrdrb\brdrs\brdrw20\brdrcf4 \clbrdrr\brdrs\brdrw20\brdrcf4 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 POST\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 /pizzas/:id/delete\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf3 destroy\cell \lastrow\row
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f0\fs24 \cf2 \
+Add the methods in 
+\b pizza_controller.rb
+\b0  to READ, etc. \
+READ function \
+\
+get '/pizzas' do\
+  @pizzas = Pizza.all()			- this is in the pizza.rb\
+  erb( :index )  # same name as the action\
+end\
+\
+and in the index.erb we can use the @pizzas variable\
+<% @pizzas.each() do |pizza| %>\
+\
+<% end %>\
+\
+<p>All the pizzas</p>\
+<% @pizzas.each() do |pizza| %>				- just running the ruby code (ice cream only)\
+<p>Name: <%= pizza.pretty_name() %></p>		- getting the result of the ruby code and sending it to HTML (ice cream + cone)\
+<% end %>\
+\
+Note that only % here not %= as just printing something out (i.e just ice cream cone % not ice cream cone + flake %= )\
+\
+To test:\
+\pard\pardeftab720\sl360\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/pizzas"}}{\fldrslt \cf2 http://localhost:4567/pizzas}}\
+\
+<p>All the pizzas</p>\
+\
+<% @pizzas.each() do |pizza| %>\
+\
+<p>Name: <%= pizza.pretty_name() %></p>\
+<p>Order: <%= pizza.quantity %> x <%= pizza.topping %></p>	- where x is a numerator to loop (doesn\'92t have to be x)\
+<hr/>\
+\
+<% end %>\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\b \cf2 In layout.erb \
+
+\b0 \
+<!DOCTYPE html>\
+<html>\
+<head>\
+  <title>Pizza Shop</title>\
+</head>\
+<body>\
+  <%= yield %>		- this command puts all the code from index.erb which is run from pizza_controller.rb\
+</body>\
+</html>\
+\
+
+\b pizza_controller.rb
+\b0 \
+\
+require( 'sinatra' )\
+require( 'sinatra/contrib/all' )\
+require( 'pry-byebug' )\
+require_relative('./models/pizza')\
+\
+# INDEX - READ\
+\
+get '/pizzas' do\
+  @pizzas = Pizza.all()\
+  erb( :index ) 			 # the index refers to the index.erb action file\
+end\
+\
+To test the code\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2 \cf1 \cb6 \kerning1\expnd0\expndtw0 \CocoaLigature0 ruby pizza_controller.rb\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f0 \cf2 \cb1 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+then {\field{\*\fldinst{HYPERLINK "http://localhost:4567/pizzas"}}{\fldrslt http://localhost:4567/pizzas}}\
+\
+to put comments in an era file:\
+          <!-- Walter White -->\
+\
+Note: the routes have to be put in priority order in the pizza_controller.rb\
+this is because there will be a clash of (SHOW - READ) pizzas/:id if placed before pizzas/new (NEW CREATE) -\
+so correct the code so that:\
+\
+i.e. NEW must come before SHOW - refer to the RESTful table for correct order\
+\
+# INDEX - READ\
+get '/pizzas' do\
+  @pizzas = Pizza.all()   # all() is in the pizza.rb class\
+  erb( :index )           # see RESTful table same name as the erb action file\
+end\
+\
+# NEW - CREATE\
+get '/pizzas/new' do\
+  \
+end\
+\
+# SHOW - READ\
+get '/pizzas/:id' do\
+  @pizza = Pizza.find( params[:id] )\
+  erb( :show )            #  see RESTful table we need to write a show.erb\
+end\
+\
+Testing:\
+\
+Note that once a change made to era\'92s, etc just refresh browser\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/pizzas/new"}}{\fldrslt \cf2 http://localhost:4567/pizzas/new}}\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/pizzas"}}{\fldrslt 
+\f3 \cf7 \ul \ulc7 All Pizzas}}
+\f3 \cf0 \
+First Name: \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f0 \cf2 \
+In the new.erb:\
+<form>  \
+  <lable> for="first_name-field">First Name:</lable>\
+  <input id="first_name-field" name="first_name" type="text" /> 		Note here that first_name \
+\
+Now code in new.erb is:\
+\
+<form>  \
+\
+  <lable for="first-name-field">First Name:</lable>\
+  <input id="first-name-field" name="first_name" type="text" />	first_name is the reference to the pizza.rb variable\
+										(we can access the keys from the params hash)\
+  <label for="last-name-field">Last Name:</label>\
+  <input type="text" id = "last-name-field" name="last_name"> 	last_name is the reference to the pizza.rb variable\
+\
+  <lable for="pizza-select"<Select your pizza:</label>\
+  <select id="pizza-select" name="topping">				topping is the reference to the pizza.rb variable\
+    <option value="Margherita">Margherita</option>\
+    <option value="Pepperoni">Pepperoni</option>\
+  </select>\
+\
+</form>\
+\
+Now add the quantity and the button for order:\
+\
+<label for="quantity">How many do you want?</label>\
+  <input type="number" id="quantity" name="quantity">\
+\
+  <input type="submit" value="Order Pizza">\
+ \
+But we need to send the information to the server with the line at the top of new.erb:\
+\
+<form action="/pizzas method="POST"> 			again from the RESTful table\
+\
+we can use the dev tools whilst on the web page to see where our application is - go to Network tab then Headers tab.\
+Data is on the way to the server but we are not doing anything on the server - the only thing that is changing at the moment \
+is the URL changes in the browser. \
+\
+<form action="/pizzas" method="POST">  \
+\
+BUT will get the following error:\
+\
+Sinatra doesn\'92t know this ditty:\
+\
+\pard\pardeftab720\sl500\partightenfactor0
+
+\f4\fs44 \cf8 get '/pizzas%20method=' do\
+  "Hello World"\
+end\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f0\fs24 \cf2 \
+We need to add a create root: \
+\
+# CREATE - CREATE this is what happens when you submit a pizza order\
+post '/pizzas' do         \
+  # pass in 'params' hash to access pizza.rb variables\
+  # Note here the @pizza so that create.erb can access the variables e.g total()\
+  @pizza = Pizza.new( params ) \
+  @pizza.save()  \
+  erb( :create )\
+end\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\b\fs36 \cf2 Wojtek - Interfaces
+\b0\fs24 \
+\
+NB - Do not put form objects in labels but forms should always have labels\
+i.e. in the Pizza shop example (last night\'92s homework:\
+\
+<label for="select_topping">Select topping</label>\
+<select id="select_topping" name="select_topping">\
+    <option>Cheese</option>\
+    <option>Kittens</option>\
+    <option>Fairydust</option>\
+    <option>Fluff</option>\
+</select>\
+\
+Interfaces Should Be:\
+1) Unobtrusive, Intuitive\
+Ease of use as humans we look for patterns\
+The gov.uk developers code to ensure that a 12 year old can operate their forms. \
+2) Consistency\
+Patterns again, familiarity for the users\
+3) Visual Hierarchy\
+Do not hide content below screen folders\
+4) Efficiency\
+How well is engine for the website written so that it is efficient in terms of coding \
+is amount of code for the functionality proportional\
+5) Speed of communication\
+A user has lost interest after 3 seconds (on average) if not captured  straight away\
+\
+Developing an interface\
+Start with a user journey\
+Paper prototyping -\
+1) Difficult to come up with ideas on the fly\
+2) Hard to distinguish drop down/check box, etc. \
+3) Need to show other people what it does for comments i.e. avoid bias\
+4) When building forms give users a contextual clue as to what to do\
+\
+Hogwarts Lab:\
+\
+Pair programming - Irma/Johnny \
+\
+Cloned the lab repo under:\
+\
+\
+\
+Dumbledore has asked you to make a system for tracking student enrolments at Hogwarts.\
+\
+Each student has:\
+- A first name\
+- A second name\
+- A house\
+- An age\
+\
+Part 1:\
+ - Create a Hogwarts database\
+ - Create a table for Students\
+\
+Part 2\
+ - Create a ruby model that can save() a students details\
+ - Create some seed data to populate the database with students\
+\
+Part 3\
+- Add methods to a student to\
+  - find all the students\
+  - find a student by id\
+\
+Part 4\
+- Create a view to show all the students\
+\
+Part 5\
+- Create a view to create a new student\
+  - hard code a drop down of house names\
+\
+Part 6\
+\
+A house can be one of Gryffindor, Ravenclaw, Hufflepuff, or Slytherin and should be stored in the database with:\
+  - A name\
+  - Optionally, a url for a logo\
+\
+  - Create a table for Houses\
+  - Create a ruby model that can save() the details of a house\
+  - Seed the database\
+\
+Part 7\
+  - Add a method to House to find all houses\
+  - Add a method to House to find a house by id\
+\
+Part 8\
+  - Alter the student to have a foreign key to House instead of text\
+  - Add a method to Student to find a house() for the student\
+\
+Part 9\
+  - Change the new student form to populate the drop down from the House table\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\b\fs28 \cf2 LAB Notes\
+
+\b0\fs24 \
+The lab we worked on is located under:\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2 \cf1 \cb6 \kerning1\expnd0\expndtw0 \CocoaLigature0 /Users/user/Desktop/CodeClan/Training/week04/day03/lab/hogwarts_lab\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f0 \cf2 \cb1 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+The lab pretty much followed the approach taken for the pizza shop and cinema projects\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+Create a directory called hogwarts_lab \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+Create a db directory and touch files called hogwarts.sql, seeds.rb (like console) and sql_runner.rb\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}p\expnd0\expndtw0\kerning0
+sql -d hogwarts -f db/hogwarts.sql\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	4.	}In hogwarts.sql populated the students table\expnd0\expndtw0\kerning0
+\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	5.	}The brief says what is to be in student so in seeds started populating students.\
+{\listtext	6.	}Now create a models directory and touch a student.rb to create the Student class\
+{\listtext	7.	}Cut and paste from cinema of pizza shop all the CRUD methods and comment out all except one for testing later\
+{\listtext	8.	}Use psql -d hogwarts to check the student table has been populated via SELECT * from students;\
+{\listtext	9.	}Populate the sql_runner.rb using cut and paste from the cinema or pizza_shop labs\
+{\listtext	10.	}Put in require('pry-byebug') in seeds.rb. Test that the seeds.rb is working via ruby db/seeds.rb and put in the appropriate commands to test e.g. student1.full_name(). Add to seeds the hashes that will be used to define each student e.g student1, student2, etc.Put in student1.save, etc. \
+{\listtext	11.	}Now touch in hogwars_lab (top directory) a file called student_controller.rb to build the sinatra communication between ruby code and the database for display on the browser.\
+{\listtext	12.	}touch /views/layout.erb and copy and paste from pizza_shop layout.erb\
+{\listtext	13.	}Create a INDEX READ route (see RESTful table) and pizza lab from day02. This is  a \'91get\'92 \
+{\listtext	14.	}touch ./views/index.erb (embedded ruby file)\
+{\listtext	15.	}in the index.erb create a each() loop to display all student information \
+{\listtext	16.	}Check all ok on browser via localhost:4567/students - this just reads the sql table data.\
+{\listtext	17.	}Now add a houses table to the hogwarts.sql and remember to use step 3 to update the database note that the drop table commands need to be the reverse of table creation. \
+{\listtext	18.	}In seeds.rb now populate the house1, house2, etc objects.\
+{\listtext	19.	}touch a models/house.rb\
+{\listtext	20.	}Add in all the required CRUD methods and test using pry as usual via ruby db/seeds.db\
+{\listtext	21.	}The lab question requires a reference from the students to the house they are in.\
+{\listtext	22.	}In hogwarts.sql put in a line in the students table with a foreign key called house_id to reference the houses table - add in delete cascade to ensure that tables are closed correctly due to dependency. Run psql again to update database.\
+{\listtext	23.	}Update the student.rb to reflect the use of house_id\
+{\listtext	24.	}Create a house() function that returns the house that is associated with the student.\
+{\listtext	25.	}Check the house sql table is ok via psql -d hogwarts and use select statement to list contents\
+{\listtext	26.	}Add a NEW CREATE to the student_controller.rb in order to display house information on the browser. Call the all() function in the House class to retrieve all the houses. \
+{\listtext	27.	}Touch a views/new.erb file\
+{\listtext	28.	}In the new.erb file describe the form \
+{\listtext	29.	}Note the code below to fetch all the houses described:\
+{\listtext	30.	}<label for="first-name-field">First Name:</label>\
+  <input id="first-name-field" type="text" name="first_name"/>\
+\
+  <label for="second-name-fields">Second Name:</label>\
+  <input id="second-name-fields" type="text" name="second_name">\
+\
+  <label for="house-select">Select Your House:</label>\
+  <select id="house-select" name="house_id">\
+    <% for house in @houses do%>\
+    <option value="<%=house.id%>" ><%=house.name%></option> \
+    <%end%>\
+  </select>\
+    31.  In the code above not use of house.id and house.name\
+    32. The lab asks to add url\'92s to display the house icon\'92s (sent on slack)\
+    33. Change the hogwarts.sql to include a logo_url VARCHAR(512) in the houses table and run psql again to update the changes. \
+    34. Update the house.rb to refer to the logo_url.\
+    35. In order to show the url the index.erb has to be updated with\
+    <img src="<%= student.house.logo_url %>" />\
+    36. The seeds.rb has to be updated to refer to the logo.url also e.g. this for all four houses\
+  house1 = House.new(\{\
+  "name" => "Gryffindor",\
+  "logo_url" => "https://vignette2.wikia.nocookie.net/harrypotter/images/e/ee/Gryffindor_Crest-0.jpg/revision/latest?cb=20160729145529"  \})\
+    37. Check all ok via ruby ./student_controller.rb and in browser localhost:4567/students/new should see the students and their house logo\'92s on screen.\
+    38. The lab also wants the ability to enrol a student. A CREATE CREATE route is needed in the student_controller.rb class. \
+    39. Use a post and call the Student.save() function to save and then redirect the page:\
+# CREATE - CREATE\
+post '/students' do\
+  @students = Student.new(params)\
+  @students.save()\
+  redirect '/students'\
+end\
+   40. The post method above uses the index.erb file - add the following line:\
+<p><a href="/students/new">Enroll Student</a></p> \
+   41.this will instigate the save() method in the Student class when the link is pressed on the browser page. \
+   42. Git add and commit at regular intervals. \
+     \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 We did the lab on Irma\'92s machine and she created a repo. In order to copy and have the option to change a local repo for myself you need to fork and clone in git. The steps are:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\partightenfactor0
+\ls2\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}The other person creates a repo and cut and pastes the url to you.\
+{\listtext	2.	}You go to the url and click on Fork\
+{\listtext	3.	}Click on my picture in window\
+{\listtext	4.	}Message says copying all in repo to my space\
+{\listtext	5.	}I now have a copy of the repo in my git space\
+{\listtext	6.	}To put all the contents of this repo on my machine locally click on the clone button at the top level of my repo copy\
+{\listtext	7.	}Copy the SSH address using the book icon\
+{\listtext	8.	}On my local machine go the location where you want the repo to reside\
+{\listtext	9.	}git clone <SSH address>\
+{\listtext	10.	}All the code under the repo is then copied to my local machine and I can work on it without affecting the original repo from the other person as i have my own local copy.\
+{\listtext	11.	}If I make any changes then it is the usual\
+{\listtext	12.	}git add .\
+{\listtext	13.	}git commit -m \'93comment here\'94\
+{\listtext	14.	}git push\
+{\listtext	15.	}The clone command has remembered the location on github so there is  no need to do anything else except git push.\expnd0\expndtw0\kerning0
+ \
+}

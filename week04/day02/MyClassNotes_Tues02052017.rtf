@@ -1,15 +1,22 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red255\green255\blue255;}
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 HelveticaNeue-Bold;\f2\fnil\fcharset0 HelveticaNeue;
+\f3\fnil\fcharset0 Menlo-Regular;\f4\froman\fcharset0 Times-Roman;\f5\fmodern\fcharset0 Courier;
+}
+{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red255\green255\blue255;\red26\green26\blue26;
+\red27\green31\blue34;\red215\green219\blue223;\red109\green109\blue109;\red244\green246\blue249;\red34\green79\blue188;
+\red0\green0\blue233;\red0\green0\blue0;\red117\green117\blue117;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww14080\viewh10140\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 Week04 Day02\
-\
+\f0\b\fs36 \cf0 Week04 Day02\
+
+\b0\fs24 \
 http://www.ponderweasel.com/wp-content/uploads/2014/11/who-invented-rock-paper-scissors.png\
 \
-Homework recap\
-\
+
+\b\fs36 Homework recap\
+
+\b0\fs24 \
 See Matthew\'92s solution:\
 \
 Game class\
@@ -24,8 +31,10 @@ He uses a hash:\
 \
 cmd/shift/r - refresh\
 \
-Wojtek - HTML/CSS\
-\
+
+\b\fs36 Wojtek - HTML/CSS\
+
+\b0\fs24 \
 Design great user experiences\
 Produce clean, appealing websites\
 Make Rhubarb ice cream\
@@ -136,8 +145,11 @@ for validating code then\
 \
 html validator 		- type in google\
 \
-Sinatra Pizza Shop\
-\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\b\fs36 \cf2 Sinatra Pizza Shop\
+
+\b0\fs24 \
 Make a RESTful CRUD app with one resource\
 Understand which HTTP verbs to use\
 understand HTML forms + POST requests\
@@ -152,14 +164,296 @@ Delete			POST (DELETE)\
 \
 We are taking the pizza_shop example and making the project sinatra based.\
 \
-in pizza_controller.rb we put in the code for the CRUD actions - the back end. \
-Action\
-index			(READ)\
-new			(CREATE)\
-create			(CREATE)\
-show			(READ)\
-edit			(UPDATE)\
-update		(UPDATE)\
-destroy		(DELETE)\
+in 
+\b pizza_controller.rb
+\b0  we put in the code for the CRUD actions - the back end. \
+URL			Action			CRUD Verb\
+/photos		index			(READ)\
+/photos/new		new			(CREATE) (form)\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb1 \outl0\strokewidth0 /photos\cf2 \cb3 \outl0\strokewidth0 \strokec2 		create			(CREATE)\
+\cf4 \cb1 \outl0\strokewidth0 /photos/:id\cf2 \cb3 \outl0\strokewidth0 \strokec2 		show			(READ)\
+\cf4 \cb1 \outl0\strokewidth0 /photos\cf2 \cb3 \outl0\strokewidth0 \strokec2 		edit			(UPDATE) (form)\
+\cf4 \cb1 \outl0\strokewidth0 /photos\cf2 \cb3 \outl0\strokewidth0 \strokec2 		update		(UPDATE)\
+\cf4 \cb1 \outl0\strokewidth0 /photos\cf2 \cb3 \outl0\strokewidth0 \strokec2 		destroy		(DELETE)\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \
+\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+
+\f1\b\fs32 \cf5 \cb1 \strokec5 VERB\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 PATH\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 ACTION\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+
+\f2\b0 \cf5 GET\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 /pizzas\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 index\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat8 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat8 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat8 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 GET\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 /pizzas/:id\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 show\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 GET\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 /pizzas/new\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 new\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat8 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat8 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat8 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 POST\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 /pizzas\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 create\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 GET\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 /pizzas/:id/edit\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 edit\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat8 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat8 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat8 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 POST\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 /pizzas/:id\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 update\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \tamarb320 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth3960\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth8720\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth5060\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf6 \clbrdrl\brdrs\brdrw20\brdrcf6 \clbrdrb\brdrs\brdrw20\brdrcf6 \clbrdrr\brdrs\brdrw20\brdrcf6 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 POST\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 /pizzas/:id/delete\cell 
+\pard\intbl\itap1\pardeftab720\sl360\qc\partightenfactor0
+\cf5 destroy\cell \lastrow\row
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \strokec2 \
+Add the methods in 
+\b pizza_controller.rb
+\b0  to READ, etc. \
+READ function \
+\
+get '/pizzas' do\
+  @pizzas = Pizza.all()			- this is in the pizza.rb\
+  erb( :index )  # same name as the action\
+end\
+\
+and in the index.erb we can use the @pizzas variable\
+<% @pizzas.each() do |pizza| %>\
+\
+<% end %>\
+\
+<p>All the pizzas</p>\
+<% @pizzas.each() do |pizza| %>				- just running the ruby code (ice cream only)\
+<p>Name: <%= pizza.pretty_name() %></p>		- getting the result of the ruby code and sending it to HTML (ice cream + cone)\
+<% end %>\
+\
+Note that only % here not %= as just printing something out (i.e just ice cream cone \cf4 \cb1 \outl0\strokewidth0 % \cf2 \cb3 \outl0\strokewidth0 \strokec2 not ice cream cone + flake \cf4 \cb1 \outl0\strokewidth0 %=\cf2 \cb3 \outl0\strokewidth0 \strokec2  )\
+\
+To test:\
+\pard\pardeftab720\sl360\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/pizzas"}}{\fldrslt \cf2 http://localhost:4567/pizzas}}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \
+<p>All the pizzas</p>\
+\
+<% @pizzas.each() do |pizza| %>\
+\
+<p>Name: <%= pizza.pretty_name() %></p>\
+<p>Order: <%= pizza.quantity %> x <%= pizza.topping %></p>	- where x is a numerator to loop (doesn\'92t have to be x)\
+<hr/>\
+\
+<% end %>\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\b \cf2 In layout.erb \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\b0 \cf2 \
+<!DOCTYPE html>\
+<html>\
+<head>\
+  <title>Pizza Shop</title>\
+</head>\
+<body>\
+  <%= yield %>		- this command puts all the code from index.erb which is run from pizza_controller.rb\
+</body>\
+</html>\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\b \cf2 pizza_controller.rb
+\b0 \
+\
+require( 'sinatra' )\
+require( 'sinatra/contrib/all' )\
+require( 'pry-byebug' )\
+require_relative('./models/pizza')\
+\
+# INDEX - READ\
+\
+get '/pizzas' do\
+  @pizzas = Pizza.all()\
+  erb( :index ) 			 # the index refers to the index.erb action file\
+end\
+\
+To test the code\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f3 \cf1 \cb9 \kerning1\expnd0\expndtw0 \CocoaLigature0 \outl0\strokewidth0 ruby pizza_controller.rb\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f0 \cf4 \cb1 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+then {\field{\*\fldinst{HYPERLINK "http://localhost:4567/pizzas"}}{\fldrslt \cf4 http://localhost:4567/pizzas}}\
+\
+to put comments in an era file:\
+          <!-- Walter White -->\
+\
+Note: the routes have to be put in priority order in the pizza_controller.rb\
+this is because there will be a clash of (SHOW - READ) pizzas/:id if placed before pizzas/new (NEW CREATE) -\
+so correct the code so that:\
+\
+i.e. NEW must come before SHOW - refer to the RESTful table for correct order\
+\
+# INDEX - READ\
+get '/pizzas' do\
+  @pizzas = Pizza.all()   # all() is in the pizza.rb class\
+  erb( :index )           # see RESTful table same name as the erb action file\
+end\
+\
+# NEW - CREATE\
+get '/pizzas/new' do\
+  \
+end\
+\
+# SHOW - READ\
+get '/pizzas/:id' do\
+  @pizza = Pizza.find( params[:id] )\
+  erb( :show )            #  see RESTful table we need to write a show.erb\
+end\
+\
+Testing:\
+\
+Note that once a change made to era\'92s, etc just refresh browser\
+\
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/pizzas/new"}}{\fldrslt http://localhost:4567/pizzas/new}}\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "http://localhost:4567/pizzas"}}{\fldrslt 
+\f4 \cf10 \ul \ulc10 \outl0\strokewidth0 \strokec10 All Pizzas}}
+\f4 \cf11 \outl0\strokewidth0 \strokec11 \
+First Name: \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f0 \cf4 \outl0\strokewidth0 \
+In the new.erb:\
+<form>  \
+  <lable> for="first_name-field">First Name:</lable>\
+  <input id="first_name-field" name="first_name" type="text" /> 		Note here that first_name \
+\
+Now code in new.erb is:\
+\
+<form>  \
+\
+  <lable for="first-name-field">First Name:</lable>\
+  <input id="first-name-field" name="first_name" type="text" />	\cf4 first_name is the reference to the pizza.rb variable\cf4 \
+										(we can access the keys from the params hash)\
+  <label for="last-name-field">Last Name:</label>\
+  <input type="text" id = "last-name-field" name="last_name"> 	\cf4 last_name is the reference to the pizza.rb variable\cf4 \
+\
+  <lable for="pizza-select"<Select your pizza:</label>\
+  <select id="pizza-select" name="topping">				topping is the reference to the pizza.rb variable\
+    <option value="Margherita">Margherita</option>\
+    <option value="Pepperoni">Pepperoni</option>\
+  </select>\
+\
+</form>\
+\
+Now add the quantity and the button for order:\
+\
+<label for="quantity">How many do you want?</label>\
+  <input type="number" id="quantity" name="quantity">\
+\
+  <input type="submit" value="Order Pizza">\
+ \
+But we need to send the information to the server with the line at the top of new.erb:\
+\
+<form action="/pizzas method="POST"> 			again from the RESTful table\
+\
+we can use the dev tools whilst on the web page to see where our application is - go to Network tab then Headers tab.\
+Data is on the way to the server but we are not doing anything on the server - the only thing that is changing at the moment \
+is the URL changes in the browser. \
+\
+<form action="/pizzas" method="POST">  \
+\
+BUT will get the following error:\
+\
+Sinatra doesn\'92t know this ditty:\
+\
+\pard\pardeftab720\sl500\partightenfactor0
+
+\f5\fs44 \cf12 \outl0\strokewidth0 \strokec12 get '/pizzas%20method=' do\
+  "Hello World"\
+end\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f0\fs24 \cf4 \outl0\strokewidth0 \
+We need to add a create root: \
+\
+# CREATE - CREATE this is what happens when you submit a pizza order\
+post '/pizzas' do         \
+  # pass in 'params' hash to access pizza.rb variables\
+  # Note here the @pizza so that create.erb can access the variables e.g total()\
+  @pizza = Pizza.new( params ) \
+  @pizza.save()  \
+  erb( :create )\
+end\
 \
 }
