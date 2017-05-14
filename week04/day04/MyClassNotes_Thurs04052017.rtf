@@ -1,0 +1,367 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Light;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;\red34\green79\blue188;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14080\viewh10140\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs36 \cf0 Week04 Day04\
+
+\b0\fs24 \
+
+\b\fs28 Homework Work Through\
+\
+
+\f1\b0 We needed create, update, destroy methods in the student_controller and can use style.css to enhance the website. Classes can be used to individually style every part of the page. \
+
+\f0\b \
+in index.erb:\
+
+\b0 \
+<lable \
+\
+<p class=\'93example\'94        \
+\
+
+\b in style.css:\
+
+\b0 \
+To specify all the h2\'92s throughout the website:\
+\
+h2 \{\
+  font-family: cursive, monspace;\
+  color: firebrick;\
+  font-weight: bolder;\
+\}\
+\
+to use classes to modify individual parts of website:\
+\
+this is the class name\
+.example \{\
+  background-color: red; \
+\}\
+\
+To have different CSS rules for e.g Age: 12 you need to have different paragraphs in order to bring in different CSS rules e.g. <p> Age spec</p> <p number spec /p>\
+\
+Useful website\
+\
+{\field{\*\fldinst{HYPERLINK "https://css-tricks.com/"}}{\fldrslt https://css-tricks.com/}}\
+\
+
+\b Planning a Software Development Project\
+
+\b0 \
+The goal is an MVP - minimal viable product\
+\
+MoSCoW - Must Should Could Would\
+\
+MUST be included (MVP)\
+SHOULD be included (extra from this onward)\
+COULD be included\
+WOULD be included\
+\
+
+\b Trello \
+
+\b0 \
+Very useful too to track tasks\
+Traffic light system red (not done) orange (working on) green (completed)\
+\
+
+\b For PDA:\
+
+\b0 \
+
+\b Use case diagram\
+
+\b0 \
+Overview of the usage requirements for a system\
+Use cases (sequence of actions)\
+Actors\
+Associations\
+System boundary boxes (optional)\
+\
+e.g. customer and bank - check balances, deposit funds, withdraw cash, transfer funds. \
+\
+This system is described by processes. The PDA approach is out of date - Wojtek knows the state of the art. \
+\
+Think about CRUD methods\
+\
+
+\b Class diagram \
+
+\b0 \
+Not an object diagram - show the relationship between the classes - a line at least.  \
+\
+
+\b Object Diagram\
+
+\b0 \
+An example working on this system - copy and paste the class diagram then paste into the object diagram and \
+remove all the types - it is an instance diagram so no need types. \
+\
+
+\b Inheritance Diagram\
+
+\b0 \
+Arrows upwards - so if inheriting must list the variable that is inherited in all the classes - in the parent and child classes - otherwise you are not demonstrating you know what is inherited. The relationships must be shown. Methods are optional it is the variables that are of importance. \
+\
+
+\b Activity Diagram\
+
+\b0 \
+A flow chart of a user moving through the system - it is not about the system itself. Worth having columns to clarify what steps are taken. Always show a start and an end. Show the arrows. A square box is a physical thing and a round box is an actions. Diamonds represent decisions. \
+\
+We can do all these diagrams next Friday (12th May) or wait until then to do them once our project has finished.  \
+\
+draw.io is ok to do this but Wojtek \
+\
+
+\b Implementation Constraints Plan \
+
+\b0 \
+What can stop you implementing your product e.g. browser limitations, limited budget, usability for disabled people etc. What can be problematic. We do not need to do this at the moment but worth considering. Useful to do this after the fact to see what the limitations are - managers often raise these type of questions. \
+\
+Think about what tasks you want to achieve for that day - small goals - do not focus on the full week and the entire task list. \
+\
+Kat will help with CSS. Look at modal boxes. CSS tricks website, you tube tutorials. \
+12 box section approach for layout on CSS describing different widths, etc. \
+\
+Recommend minimal CSS for a minimal MVP. \
+Be intuitive with naming e.g. nav_box_user (navigation box on the user page). \
+\
+First unit for PDA checklist tomorrow (Friday 5th May)\
+\
+
+\b CSS Positioning (Simon)\
+
+\b0 \
+In index.html go to file in tree and right click (two fingers on touchpad) to open in chrome\
+\
+When in chrome two fingers touchpad to 
+\b inspect
+\b0 \'85 \
+\
+block/inline/inline block\
+\
+block - ptags, divs, \
+\
+an line block is the Click Me! button on the webpage.\
+\
+When in inspect click on the three dots next to the X at the right hand corner of the inspect window to re-position the windows. \
+\
+The class directory 
+\f2\fs24 \cf1 \cb2 \CocoaLigature0 /Users/user/Desktop/CodeClan/Training/week04/day04\
+
+\f0\fs28 \cf0 \cb1 \CocoaLigature1 \
+in main.css\
+\
+#blocks div \{\
+  text-align: center;\
+  font: 30px Helvetica;\
+  color: white;\
+  padding: 10px;\
+\}\
+\
+These are classes:\
+\
+.red \{\
+  background-color: #d9534f;\
+\}\
+\
+.blue \{\
+  background-color: #428bca;\
+\}\
+\
+.green \{\
+  background-color: #5cb85c;\
+\}\
+\
+Try and use classes which are concise. The #blocks div refer to the id\'92s. Anything in this section will be applied \
+using the #blocks div. The usage is in the index.html as:\
+\
+ <section id="blocks">\
+\
+      <div class="red">\
+       Red\
+      </div>\
+\
+      <div class="blue">\
+        Blue\
+      </div>\
+\
+      <div class="green">\
+        Green\
+      </div>\
+\
+ </section>\
+\
+Adding the inline lines for all the colours lines them all up:\
+\
+.red \{\
+  background-color: #d9534f;\
+  display: inline;				/*     added this line  */\
+\}\
+\
+.blue \{\
+  background-color: #428bca;\
+  display: inline; 				/*     added this line  */\
+\}\
+\
+.green \{\
+  background-color: #5cb85c;\
+  display: inline;				/*     added this line  */\
+\}\
+\
+This code adds a small margin on the right hand side between boxes:\
+\
+Inline means wrap itself to the content. Inline block means adding margins.\
+\
+.red \{\
+  background-color: #d9534f;\
+  display: inline-block;\
+\}\
+\
+.blue \{\
+  background-color: #428bca;\
+  display: inline-block;\
+\}\
+\
+.green \{\
+  background-color: #5cb85c;\
+  display: inline-block;\
+\}\
+\
+visibility: hidden;                 hides something e.g. a button\
+\
+
+\b Flex box\
+
+\b0 \
+We are looking at the Vanilla CSS and not packages such a bootstrap which is a library of functions. This is t make sure that we have a fundamental knowledge of CSS. \
+\
+in sublime for html - open up sublime and html <tab> and skeleton code comes up\
+\
+in style.css - \
+\
+@media - sets what device to put application on. Usually need all media\
+\
+Note here that there is NO SEMICOLON after the px!!\
+\
+@media all and ( min-width: 480px ) \{\
+\
+  .grid-row-sm \{\
+   flex-direction: row;\
+  \}\
+\}\
+\
+flex box froggie - to see flex box. \
+\
+https://flexboxfroggy.com/\
+\
+
+\b Class - Zombies Application\
+
+\b0 \
+createdb zombieland\
+psql -d zombies -f db/zombies.sql\
+ruby db/seeds.db\
+ruby app.rb (this runs the SINATRA and calls in the threes controllers)\
+type localhost:4567:/zombies in browser\
+\
+Note in the 
+\b bitings_controller:
+\b0 \
+\
+get '/bitings' do\
+  @bitings = Biting.all\
+  @actions = Action.all\
+  erb ( :"bitings/index" )\
+end\
+\
+the code has to navigate to bitings/index (index.erb) as we are currently at the /views directory. \
+\
+get '/bitings/new' do\
+  @victims = Victim.all\
+  @zombies = Zombie.all\
+  erb(:"bitings/new")\
+end\
+\
+the code has to navigate to bitings/new (new.erb) as we are currently at the /views directory. \
+\
+Note that the controllers directory has to be at the top level as views. As we have 3 controllers (for organisational purposes) we need a controllers directory. The views directory has to be at the same level (i.e. the top level). The app.rb is used to run all the controllers as we can only run one controller and this has to be at the same level as the \
+\
+Note: For the layout.erb the rel=\'93stylesheet\'94 lines refer to the \'91public\'92 directory where the images reside i.e.\
+\
+<link rel="stylesheet" type="text/css" href="/styles/buttons.css">\
+<link rel="stylesheet" type="text/css" href="/styles/forms.css">\
+ <link rel="stylesheet" type="text/css" href="/styles/structure.css">\
+ <link rel="stylesheet" type="text/css" href="/styles/tables.css">\
+\
+All images and css go in the public folder.\
+\
+The index.erb in the bitings directory gets picked up by the layout.erb and is implemented using \'91yield\'92 :\
+\
+<section id="content">\
+  <%= yield %>\
+  </section>\
+\
+The structure.css file in the ./styles directory forms the backbone of the style of the pages with the other css\'92s - buttons, forms and tables which are more specific. \
+\
+In the biting.rb:\
+\
+\
+\
+def victim\
+    sql = "SELECT * FROM victims v\
+          INNER JOIN bitings b\
+          ON b.victim_id = v.id\
+          WHERE v.id = #\{@victim_id\}"\
+\
+Craig thinks this will work - the inner join above not necessary\
+ sql = "SELECT * FROM victims  WHERE victim_id = #\{@id\}"\
+\
+    results = SqlRunner.run( sql )\
+    return Victim.new( results.first )\
+  end\
+\
+  def zombie\
+    sql = "SELECT * FROM zombies z\
+          INNER JOIN bitings b\
+          ON b.zombie_id = z.id\
+          WHERE z.id = #\{@zombie_id\}"\
+    results = SqlRunner.run( sql )\
+    return Zombie.new( results.first )\
+  end\
+\
+
+\b Project Rules\
+
+\b0 \
+12 o\'92clock weds code will be written and instructors will look at it BUT can continue working if you need a feature to work - really it should be CSS and display rather than any functionality. You really need to be done by Wednesday.\
+\
+rubber duck with a constructive question - don\'92t say it\'92s stuck, say what you are trying to do and why before getting a fix from them\
+thursday presentations will be (10 mins) 5 mins of questions\
+send them a song - entrance music - a you tube link.\
+need to see planning, trailer board, functionality show off, show off some code, issues, proud of, tricky bits, areas that I learned from  \
+power point keynote\
+want to see ruby, sinatra, etc all that has been taught over the last 4 weeks\
+don\'92t use active record \
+lots of git commits, every method, small functionality - 50 - 100 commits. \
+they will look at git from weds 12o\'92clock\
+9 to 6 available on weekend but need to have a few people need to be in.\
+No pop up boxes\
+don\'92t work at home as difficult to get help. \
+expected to be in at 9 for scrum mon to thurs and 10 on friday. \
+once completed send them the link to your repo on the homework \
+\
+Google Slides\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://drive.google.com/drive/my-drive"}}{\fldrslt \cf0 https://drive.google.com/drive/my-drive}}\
+\
+{\field{\*\fldinst{HYPERLINK "https://docs.google.com/presentation/d/1x0yr-sKnTwW1n_qLBkWONwnimDTOV22hfTMnzPPH5HM/edit#slide=id.p"}}{\fldrslt https://docs.google.com/presentation/d/1x0yr-sKnTwW1n_qLBkWONwnimDTOV22hfTMnzPPH5HM/edit#slide=id.p}}\
+\
+Diagrams\
+\
+Case diagram - {\field{\*\fldinst{HYPERLINK "https://www.draw.io/"}}{\fldrslt https://www.draw.io/}}}
