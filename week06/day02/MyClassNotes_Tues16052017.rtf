@@ -1,0 +1,126 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14080\viewh10140\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs36 \cf0 Week06 Day02\
+
+\b0\fs24 \
+
+\b\fs28 Java
+\b0 \
+\
+Objectives:\
+\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\'95	}Know what an ArrayList is\
+{\listtext	\'95	}Be able to understand the difference between an array and a base array\
+{\listtext	\'95	}Be able to create an array list and add items, empty item\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+import java.util.*  - where util is called the namespace\
+\
+Note that ArrayList is for storing objects and not for primitives i.e. ArrayList<int> incorrect.\
+\
+Objectives:\
+\
+Understand method overloading\
+Understand the need for polymorphism\
+Understand the power of polymorphism\
+Use polymorphic methods and collections\
+\
+e.g. a Human is \'91human\'92 and an \'91Edible\'92 i.e. two forms via the Edible interface. The point is that the Edible interface is a type (same for Salmon is a salmon and is also an \'91Edible\'92). Always go back to the type i.e. something IS a something. \
+\
+Look at interfaces as a contract with the class that is using it. Any methods declared in the interface HAVE to be implemented by the class using the interface. You can use multiple interfaces.  \
+\
+We can remove this code in BearTest with an interface in place. \
+\
+// @Test\
+  // public void bellyIsFull()\{\
+  //   for(int i = 0; i<5; i++)\{\
+  //     bear.eat(salmon);\
+  //   \}\
+  //   assertEquals(bear.isBellyFull(), true);\
+  // \}\
+\
+  // @Test\
+  // public void canNotEatSalmonWhenBellyFull()\{\
+  //   for(int i = 0; i<10; i++)\{\
+  //     bear.eat(salmon);\
+  //   \}\
+  //   assertEquals(5, bear.foodCount());\
+  // \}\
+\
+Objectives:\
+\
+Understand how to cast variables between types\
+\
+casting is we have a bird and we want a duck as we may want to use the duck methods.\
+\
+Know what a HashMap is\
+Be able to use HashMaps\
+\
+HashMaps in Java are the same as Hashes in Ruby.\
+\
+in this below there is no need to label the right hand side as left hand side specifies type.\
+\
+HashMap<String, String> javaKnowledge = new HashMap<>();\
+\
+The type cannot be your own objects e.g. Salmon use String, int, etc. \
+\
+If you have HashMap<int, String> this is pointless as you can use an ArrayList as\
+ArrayList uses integer indices. But you can use HashMap<String, Integer> \
+Note that Integer object is used here - primitives are NOT allowed. \
+\
+Homework\
+\
+printDetails should not be doing any printing just public String printDetails()\
+\
+@Before \
+  public void before() \{\
+    photographer = new Photographer("Nikon 34T", \
+                                    "Noise reduction filter",\
+                                    "Hi-resolution");\
+  \}\
+\
+private String cameraName;\
+  private String cameraFilter;\
+  private String cameraResolution;\
+  private ArrayList<Printable> cameras;\
+\
+public Photographer(String cameraName, String cameraFilter, String cameraResolution)\{\
+    this.cameraName = cameraName;\
+    this.cameraFilter = cameraFilter;\
+    this.cameraResolution = cameraResolution;\
+    this.cameras = new ArrayList<Printable>();\
+  \}\
+\
+public void addCamera() \{\
+     \
+  \}\
+\
+  public void removeCamera() \{\
+\
+  \}\
+\
+  public String getCameraName()\{\
+    return this.cameraName;\
+  \}\
+\
+  public String getCameraFilter()\{\
+    return this.cameraFilter;\
+  \}\
+\
+  public String getCameraResolution()\{\
+    return this.cameraResolution;\
+  \}\
+\
+\
+\
+\
+\
+\
+}

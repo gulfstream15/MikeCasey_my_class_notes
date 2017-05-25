@@ -1,0 +1,259 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 HelveticaNeue;
+}
+{\colortbl;\red255\green255\blue255;\red34\green79\blue188;\red27\green31\blue34;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10720\viewh10460\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs28 \cf0 Week06 Day03\
+
+\b0\fs24 \
+Note about protected - not really used much as it is really easy to have chains of child classes accessing variables. Better to use private as much as possible. \
+\
+Homework - Talkthrough\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf1 \cb2 \CocoaLigature0 /Users/user/Desktop/CodeClan/HomeWork/week06/day02/model_answer/camera_homework_solution \
+\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+Added a camera class as a superclass and extends used in the digital and analog interfaces - this is to show how inheritance works BUT we do not need a Camera class as we are not using it in the analogue and digital classes. \
+\
+In order to stop someone creating a Camera but they can use it - you HAVE to subclass it i.e. it can\'92t be instantiated. \
+\
+public 
+\b abstract
+\b0  class Camera \{\
+\
+Tests still all work as normal:\
+
+\f1 \cf1 \cb2 \CocoaLigature0 javac AnalogueCameraTest.java && junit AnalogueCameraTest\
+javac DigitalCameraTest.java && junit DigitalCameraTest\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+An abstract class is somewhere between a class and an interface. We can have methods in it but they have to be used by the subclasses. In the Camera class we add the abstract keyword\
+\
+ public abstract String printDetails();\
+\
+Now we can get rid of the implements keyword in the Analogue and the Digital classes:\
+\
+class DigitalCamera extends Camera implements Printable \{			\
+goes to:\
+\
+class DigitalCamera extends Camera \{\
+\
+and \
+\
+class AnalogueCamera extends Camera implements Printable \{			\
+goes to:\
+\
+class AnalogueCamera extends Camera \{\
+\
+Now Printable can be removed and all references to Printable can be changed to Camera\
+\
+An abstract class has to be a super class as to use it you need sub classes.\
+\
+Wizard Management - Composition\
+\
+we need to introduce an interface to specify that a fly() method will be implemented by the child classes. I don\'92t care how you fly - just fly how you need to. Broomstick, magic carpet and wizard al have fly methods so introduce an abstract class called Flyable an \'91able\'92 is the naming convention for abstract classes in Java (or just a sensible name will do).  \
+\
+Create a behaviours directory and create a Flyable.java (an abstract class).\
+\
+package behaviours;\
+\
+public interface Flyable \{\
+\
+  public String fly();\
+  \
+\}\
+\
+Now we need to use this interface e.g. Dragon:\
+\
+package wizard_management;\
+import behaviours.*;\
+\
+public class Dragon extends MythicalBeast implements Flyable\{\
+\
+  public Dragon(String name)\{\
+    super(name);\
+  \}\
+\
+  public String fly()\{\
+    return "Standing up tall, beating wings, lift off!";\
+  \}\
+\
+\}\
+\
+we want the wizard to fly the dragon so go in to WizardTest but he can only fly a broomstick so the following WILL NOT WORK:\
+\
+@Test\
+  public void canFlyDragon() \{\
+     Dragon dragon = new Dragon("Tilly");\
+     wizard = new Wizard("Toby", dragon);\
+     assertEquals("Standing up tall, beating wings, lift off!", wizard.fly());\
+  \}\
+\
+The wizard class now changes to:\
+\
+package wizard_management;\
+import behaviours.*;\
+\
+public class Wizard \{\
+  String name;\
+  private Flyable ride;\
+\
+  public Wizard(String name, Flyable ride)\{\
+    this.name = name;\
+    this.ride = ride;\
+  \}\
+\
+  public String getName()\{\
+    return this.name;\
+  \}\
+\
+  public Flyable getRide()\{\
+    return this.ride;\
+  \}\
+\
+  public String fly()\{\
+    return this.ride.fly();\
+  \}\
+\
+\}\
+\
+so that the wizard can fly anything flyable. But in the hasBroomstick test (WizardTest.java)\
+\
+@Test\
+  public void hasBroomstick()\{\
+    Broomstick ride = (Broomstick) wizard.getRide()		(cast needed here)\
+    assertEquals("Nimbus", ride.getBrand());\
+  \}\
+\
+With the test for the wizard flying the dragon as:\
+\
+ @Test\
+  public void canFlyDragon() \{\
+     Dragon dragon = new Dragon("Tilly");\
+     wizard = new Wizard("Toby", dragon);\
+     assertEquals("Standing up tall, beating wings, lift off!", wizard.fly());\
+  \}\
+\
+Now to make test the wizard flying a carpet:\
+@Test\
+  public void canFlyMagicCarpet() \{\
+     MagicCarpet carpet = new MagicCarpet("Purple");\
+     wizard = new Wizard("Toby", dragon);\
+     assertEquals("Hovering up, straightening out, flying off!", wizard.fly());\
+  \}\
+\
+BUT we need to make the carpet flyable MagicCarpet.java:\
+\
+public class MagicCarpet extends Carpet implements Flyable\{\
+\
+  public MagicCarpet(String colour)\{\
+    super(colour);\
+  \}\
+\
+  public String fly()\{\
+    return "Hovering up, straightening out, flying off!";\
+  \}\
+\
+\}\
+\
+We need to set the ride each time so a setRide is needed in the Wizard class:\
+\
+  public void setRide(Flyable ride) \{\
+    this.ride = ride;\
+  \}\
+\
+this method (in Flyable.java)\
+\
+ \
+public String fly()\{\
+    return this.ride.fly();\
+  \}\
+\
+is said to be a strategy in that the we are changing the way fly is used (pattern?).\
+\
+SOLID - (I missed this).\
+\
+Understand how to compose objects using interfaces:\
+\
+Single responsibility: classes should do one thing only\
+Open-closed: Open for extension, closed for modification\
+Liskov: Substitute subclass for superclass without breaking it.\
+Interface segment: lots of small interfaces > 1 big one\
+Dependency: High level classes should not depend on low level ones - should depend on interface.\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "http://www.agilemodeling.com/style/classDiagram.htm#Interfaces"}}{\fldrslt \cf0 http://www.agilemodeling.com/style/classDiagram.htm#Interfaces}}\
+\
+Lab groups:\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 Single Responsibility Principle\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 Louise\
+Charlie\
+Eoghan\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 Open-Closed Principle\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 Alasdair\
+Gill\
+Mungo\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 Liskov Substitution Principle\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 Matt\
+Johnny\
+Chris\
+Alex\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 Interface Segregation Principle\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 Marilena\
+Paul\
+Lewis\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 Dependency Inversion Principle\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 Irma\
+Daniel\
+Richard\
+\
+Homework\
+\
+\pard\pardeftab720\sl600\sa320\partightenfactor0
+
+\f2\b\fs48 \cf3 \expnd0\expndtw0\kerning0
+Card Game Homework - Planning\
+\pard\pardeftab720\sl360\sa320\partightenfactor0
+
+\b0\fs32 \cf3 The goal of this homework is to think about how you model the elements involved in a game of cards.\
+These include (but are not limited to): players, cards, hands of cards, cards being dealt, turns being taken, a game ready to be played...\
+There are then also rules about how you determine who's won, but for the moment don't think about the details of those, just about the setup of the game. How do you get to the point where you have some players holding cards ready to play?\
+At this stage we are only asking you to PLAN how you would do this i.e. think about which classes you think you would need, any interfaces you would use etc.\
+Think about which design principles and patterns might be relevant. How might you make some of the code reusable?\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 Remember to think about what tests you would need.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \kerning1\expnd0\expndtw0 \
+}

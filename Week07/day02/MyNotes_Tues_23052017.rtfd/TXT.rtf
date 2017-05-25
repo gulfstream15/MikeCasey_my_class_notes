@@ -1,0 +1,205 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Italic;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 Menlo-Bold;\f4\fnil\fcharset0 Menlo-BoldItalic;}
+{\colortbl;\red255\green255\blue255;\red109\green109\blue109;\red34\green79\blue188;\red0\green0\blue109;
+\red82\green0\blue103;\red0\green0\blue254;\red15\green112\blue3;\red221\green220\blue255;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid2\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17600\viewh9720\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Week 07 Day 02\
+\
+
+\b\fs28 # Homework - Movie Android Studio\
+
+\b0\fs24 \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\'95	}A useful method with arrays is to convert them to a list:\
+{\listtext	\'95	}public void moveUp(Film film) \{\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0                   int currentIndex = Arrays.asList(films).indexOf(film);\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0                   int currentRank = film.GetRanking();\
+                  int newIndex = currentIndex - 1;\
+                  Film temp = films[newIndex];\
+                  int newRank = temp.getRanking();\
+                  temp.setRanking(currentRank);\
+                  film.setRanking(newBank);\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0                   films[newindex]\
+           \}\
+\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	\'95	}Should have used an array for films as the homework states the top 10 list of films and doesn\'92t want the list to change if you use an ArrayList\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\i \cf2 //    Model Answer\uc0\u8232 //\u8232 //    Film[] films;\u8232 //\u8232 //    public Rankings() \{\u8232 //        films = new Film[10];\u8232 //    \}\u8232 //\u8232 //    public Rankings(Film[] films)\{\u8232 //        films = films.clone();\u8232 //    \}\u8232 \u8232 //    To find a film by name:\u8232 //\u8232 //    public Film findFilm(String name) \{\u8232 //        for(Film film: films) \{\u8232 //            if(film.getTitle() == name) \{\u8232 //                return film;\u8232 //            \}\u8232 //        \}\u8232 //        return null;\u8232 //    \}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2 \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls3\ilvl0
+\f0\i0 \cf0 {\listtext	\'95	}In android java code is in:\
+{\listtext	\'95	}top10Films/app/src/main/java/com/example/user/top10films\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+To run android:\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2 \cf1 \cb3 \CocoaLigature0 android ~/AndroidStudioProjects/Movie
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\
+
+\b\fs28 Building an Android App\
+
+\b0\fs24 \
+\pard\tx220\tx720\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li720\fi-720\pardirnatural\partightenfactor0
+\ls4\ilvl0\cf0 {\listtext	\'95	}Know how to crete and activity in android Studio \
+{\listtext	\'95	}Understand how to debug an app using breakpoints\
+{\listtext	\'95	}Be able to build and run and Android app\
+\pard\tx566\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+Changing the text size\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+cmd/, to see all the settings\
+to change the text size:\
+cmd/,\
+top menu editor->font choose the colour scheme you are on e.g. default\
+change primary font size via dropdown\
+Save as and will see text change in code window.\
+\
+XML instead of HTML to show how things look - string constants, colours, etc.\
+\
+./res\'92 folder - is the resource folder\
+./res/layout - this is how the window looks\
+./manifests - this is where the XML is described \
+\
+in the ./manifests directory the XML file has this. The intent filter is how it is launched\
+i.e. limit the intent to which the app works. \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 <
+\f3\b \cf4 intent-filter
+\f2\b0 \cf0 >\uc0\u8232     <
+\f3\b \cf4 action \cf5 android\cf6 :name=\cf7 "android.intent.action.MAIN" 
+\f2\b0 \cf0 />\uc0\u8232     <
+\f3\b \cf4 category \cf5 android\cf6 :name=\cf7 "android.intent.category.LAUNCHER" 
+\f2\b0 \cf0 />\uc0\u8232 </
+\f3\b \cf4 intent-filter
+\f2\b0 \cf0 >\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \
+the ./java MainActivity class is called the r class, it automatically update any changes and reflects them in the app.    \
+\
+1) ./res/values/strings.xml  Can change the resources string tag e.g. Mike\'92s Eight Ball is having an apostrophe need a \'91\\\'92 before them - this changes the title at the top of the emulator.\
+\
+Also can add a label via string\
+<string label_name  \'97\'97\'97\'97\'97\'97\'97 </string>\
+\
+2) in manifests - AndroidManifest.xml  \
+replace @string/string_name to @string/label_name in the android:label line in <application\
+\
+3) Debugger - click on the bug symbol at the top menu to run in debug mode and once launch set a breakpoint in the code \
+\
+grab variables tab at the bottom of the screen to get a list of the debug methods available \
+\
+In  ./java MainActivity class put a breakpoint after the super.onCreate line:\
+Log.d(getClass().toString(), \'93about to set content view\'94);    alt/enter to import the log\
+ setContentView(R.layout.activity_main);\
+Log.d(getClass().toString(), \'93\
+\
+select Android monitor at the bottom of the screen\
+\
+make sure com.codeclan.example.eightball is selected\
+\
+select \'91verbose\'92 and \'91content\'92 in the dropdowns at the top of the Android Monitor window.\
+\
+ Objectives\
+\
+- know how to add controls to an activity (an activity is a view) (add to the XML file)\
+- understand how to interact with controls in code\
+- be able to build an interactive activity with controls\
+\
+In  Gradle scripts build.gradle (Module: app) check the following line is present:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 compile 
+\f3\b \cf7 'com.android.support.constraint:constraint-layout:1.0.2'\uc0\u8232 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\b0 \cf0 res/layout/activity_main.xml\
+\
+This shows the code that directly represents the preview phone display\
+\
+Palette->text->plain text - drag and drop onto view\
+\
+to central position - click on box and click on left side and green circle and then same on right\
+and you will centralise text box. Drag up to top with same method and then move down approx. 40.\
+\
+Toggle between Design and Text tabs to see code and layout whilst in activity_main.xml\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 {{\NeXTGraphic Screen Shot 2017-05-23 at 14.21.20.png \width7580 \height8840
+}¬}\
+\
+\
+check the text box at the top and uncheck the default half way down. \
+\
+in MainActivity.java (onCreate method) this line is an issue because the findViewById returns a \'91View\'92\
+
+\f3\b \cf5 questionEditText 
+\f2\b0 \cf0 = findViewById(R.\cb8 id\cb1 .
+\f4\i\b \cf5 question_text
+\f2\i0\b0 \cf0 );\
+\
+so need to cast:\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f3\b \cf5 questionEditText 
+\f2\b0 \cf0 = (EditText)findViewById(R.id.
+\f4\i\b \cf5 question_text
+\f2\i0\b0 \cf0 );\uc0\u8232 
+\f3\b \cf5 answerTest 
+\f2\b0 \cf0 = (TextView)findViewById(R.id.
+\f4\i\b \cf5 answer_text
+\f2\i0\b0 \cf0 );\uc0\u8232 
+\f3\b \cf5 shakeButton 
+\f2\b0 \cf0 = (Button)findViewById(R.id.
+\f4\i\b \cf5 shake_button
+\f2\i0\b0 \cf0 );\
+\
+Objectives\
+\
+Know how to add new activities\
+Understand intents\
+Be able to pass information between activities using intents\
+\
+To change a class name you need to change all the other reference to it use:\
+\
+right click on class name then refactor->rename\
+\
+an intent is what we pass between the screens e.g\
+\
+startActivity(Intent intent);\
+\
+Homework \
+\
+Word counter app\
+\
+Split method useful for the homework use this.\'94a a a a a a\'94.split(\'93\'94);\
+[\'93a\'94 \'93a\'94 \'93a\'94 \'93a\'94] returned from split and can use length on this.\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\uc0\u8232 \
+}
