@@ -1,22 +1,27 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Bold;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 Menlo-BoldItalic;\f4\fnil\fcharset0 Menlo-Italic;\f5\fnil\fcharset0 HelveticaNeue;
 }
 {\colortbl;\red255\green255\blue255;\red86\green219\blue233;\red34\green79\blue188;\red15\green112\blue3;
-}
-\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\red221\green220\blue255;\red82\green0\blue103;\red0\green0\blue109;\red109\green109\blue109;\red0\green0\blue254;
+\red109\green111\blue5;\red27\green31\blue34;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14040\viewh11400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\b\fs24 \cf0 Week07 Day04\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\b0 \
+\b0 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\b Objectives Android\
+\b \cf0 Objectives Android\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\b0 \
+\b0 \cf0 \
 Know the data persistence options available in Android\
 Understand serialisation + deserialisation\
 Be able to store JSON in shared preferences (Java Script Object Notation)\
-Be able to implement a Toast\
+Be able to implement a Toast (it is a pop up that appears when the user does something)\
 \
 Data persistence means we can save an object and come back to it later e.g. SQL database and saving things on external storage e.g. flash drives. Network connections - servers. Chose networks when people like Amazon look at spending patterns, etc. \
 \
@@ -55,7 +60,6 @@ go to Gradle Scripts and build.gradle (Module:app)\
 
 \f2 \cf0 compile 
 \f1\b \cf4 'com.google.code.gson:gson:2.3.1'\uc0\u8232 \
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
 \f2\b0 \cf0 then Sync now when message comes up.\
 \
@@ -64,6 +68,318 @@ go to Gradle Scripts and build.gradle (Module:app)\
 3) display favourite titles \
 4) save list (including new movie) to shared preferences so next time you open up the screen everything should still be there. \
 \
+Note in FavouritesActivity in OnCreate\
 \
+To get pref_key ok i.e..e from red to purple  alt/enter and say FAVOURITES for the third text box in the dialog to get:\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 String sharedPrefsKey = \cb5 getString\cb1 (R.string.
+\f3\i\b \cf6 pref_key
+\f2\i0\b0 \cf0 );\uc0\u8232 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 [ \'93doughnuts\'94,			This is valid JSON\
+  \'93ramen\'94 ]\
+ \
+\{\
+  \'93name\'94: \'93Mike\'94,				This is also valid JSON\
+  \'93faveFoods\'94:[\
+      \'93doughnuts\'94,\'94ramen\'94\
+  ]\
+\}\
+\
+This line in FavouritesActivity\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb5 Gson\cb1  gson = 
+\f1\b \cf7 new 
+\f2\b0 \cf0 \cb5 Gson\cb1 ();\uc0\u8232 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 refers to the google json called son.\
+\
+Once this code in: \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 Gson gson = 
+\f1\b \cf7 new 
+\f2\b0 \cf0 Gson();\uc0\u8232 TypeToken<ArrayList<Movie>> movieArrayList = 
+\f1\b \cf7 new 
+\f2\b0 \cf0 TypeToken<ArrayList<Movie>>()\{\};\uc0\u8232 ArrayList<Movie> myFavourites = gson.fromJson(favouritesJson, movieArrayList.getType());\u8232 Log.
+\f4\i d
+\f2\i0 (
+\f1\b \cf4 "myFavourites"
+\f2\b0 \cf0 , myFavourites.toString());\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+run the enumerator and look at the Android Monitor at the bottom of \
+Android window then press one of the films in the list:\
+05-25 11:54:32.703 20893-20893/com.codeclan.topmovieslist D/Movie\'a0Title:: The Shawshank Redemption\
+05-25 11:54:32.745 20893-20893/com.codeclan.topmovieslist D/FAVOURITES: []\
+05-25 11:54:32.761 20893-20893/com.codeclan.topmovieslist D/myFavourites: []\
+\
+so myFavourites will be pushed through (an ArrayList of movies).\
+\
+now we add the following code for the serialisable:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f1\b \cf4  }
+\f4\i \cf8 // We now need to get a serializable from the extras\uc0\u8232 
+\f2\i0 \cf0 Movie newFavourite = (Movie) getIntent().getSerializableExtra(
+\f1\b \cf4 "movie"
+\f2\b0 \cf0 );\uc0\u8232 myFavourites.add(newFavourite);\u8232 Log.
+\f4\i d
+\f2\i0 (
+\f1\b \cf4 "myFavourites"
+\f2\b0 \cf0 , myFavourites.toString());\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+05-25 11:58:38.692 24830-24830/com.codeclan.topmovieslist D/FAVOURITES: []\
+05-25 11:58:38.707 24830-24830/com.codeclan.topmovieslist D/myFavourites: []\
+05-25 11:58:38.709 24830-24830/com.codeclan.topmovieslist D/myFavourites: [com.codeclan.topmovieslist.Movie@65b7745]\
+\
+\
+Note in FavouritesActivity onCreate method\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f4\i \cf8 // in the line below the \{\} is required as we are creatng a single use base class\uc0\u8232 // called an anonymous inner class. Not used widely but worth knowing. \u8232 
+\f2\i0 \cf0 TypeToken<ArrayList<Movie>> movieArrayList = 
+\f1\b \cf7 new 
+\f2\b0 \cf0 TypeToken<ArrayList<Movie>>()\{\};\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+Good advice to do all code in one go then split up code into other\
+methods if you have blank lines between code.\
+\
+cmd/alt/m - extract (create) a new method from a block of code \
+automatically. \
+could be worth putting all the json stuff in a separate class to refer to from elsewhere.\
+\
+Shared Preferences are useful when you want to keep information available\
+e.g. a fitness trackers. \
+\
+Android Project\
+\
+Emphasis on researching what is available in Android rather than showing off as we don\'92t have as much knowledge as the last project. Can do it on Java if you want. \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b \cf0 Menus in Android
+\f2\b0 \
+\
+Hambuger is three lines, meatball menu is three dots (used for settings and sometimes navigation)\
+\
+Objectives\
+\
+Be able to add a menu to an Android app. \
+go to app directory\
+add new resource and drop down to menu and all fields go to menu then save\
+will get a menu directory.\
+right click and add a new resource menu\
+\
+This code comes up and add the <item line:\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f4\i \cf0 <?
+\f1\i0\b \cf9 xml version=\cf4 "1.0" \cf9 encoding=\cf4 "utf-8"
+\f4\i\b0 \cf0 ?>\uc0\u8232 
+\f2\i0 <
+\f1\b \cf7 menu \cf9 xmlns:\cf6 android\cf9 =\cf4 "http://schemas.android.com/apk/res/android"
+\f2\b0 \cf0 >\uc0\u8232     <
+\f1\b \cf7 item \cf6 android\cf9 :id=\cf4 "@+id/action_hello"\uc0\u8232         \cf6 android\cf9 :title=\cf4 "@string/say_hello"
+\f2\b0 \cf0 ></
+\f1\b \cf7 item
+\f2\b0 \cf0 >"\uc0\u8232 </
+\f1\b \cf7 menu
+\f2\b0 \cf0 >\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+to get the @string/say_hello to go from red to green alt/enter and put in a message.\
+\
+then go to TopMoviesActivity and put in the following code:\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf10 @Override\uc0\u8232 
+\f1\b \cf7 public boolean 
+\f2\b0 \cf0 onCreateOptionsMenu(Menu menu) \{\uc0\u8232     MenuInflater inflater = getMenuInflater();\u8232     inflater.inflate(R.menu.
+\f3\i\b \cf6 activity_main
+\f2\i0\b0 \cf0 , menu);\uc0\u8232     
+\f1\b \cf7 return true
+\f2\b0 \cf0 ;\uc0\u8232 \}\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+Will have three dots in the top right corner and it will print out \
+the message we gave the 
+\f1\b \cf6 android\cf9 :title=\cf4 "@string/say_hello"
+\f2\b0 \cf0 > line in my\
+case.\
+\
+Add another method to get a toast once \'91hello there\'92 is pressed.\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf10 @Override\uc0\u8232 
+\f1\b \cf7 public boolean 
+\f2\b0 \cf0 onOptionsItemSelected(MenuItem item) \{\uc0\u8232     
+\f1\b \cf7 if 
+\f2\b0 \cf0 (item.getItemId() == R.id.
+\f3\i\b \cf6 action_hello
+\f2\i0\b0 \cf0 ) \{\uc0\u8232         Toast.
+\f4\i makeText
+\f2\i0 (
+\f1\b \cf7 this
+\f2\b0 \cf0 , 
+\f1\b \cf4 "Is it me you're looking for?"
+\f2\b0 \cf0 , Toast.
+\f3\i\b \cf6 LENGTH_LONG
+\f2\i0\b0 \cf0 ).show();\uc0\u8232         
+\f1\b \cf7 return true
+\f2\b0 \cf0 ;\uc0\u8232     \}\u8232     
+\f1\b \cf7 return super
+\f2\b0 \cf0 .onOptionsItemSelected(item);\uc0\u8232 \}\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+Now run app again to see is it me\'85 upon hello there press. \
+\
+To add another option to the menu:\
+\
+go the menu/activity_main.xml and add another item\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f4\i \cf0 <?
+\f1\i0\b \cf9 xml version=\cf4 "1.0" \cf9 encoding=\cf4 "utf-8"
+\f4\i\b0 \cf0 ?>\uc0\u8232 
+\f2\i0 <
+\f1\b \cf7 menu \cf9 xmlns:\cf6 android\cf9 =\cf4 "http://schemas.android.com/apk/res/android"
+\f2\b0 \cf0 >\uc0\u8232     <
+\f1\b \cf7 item \cf6 android\cf9 :id=\cf4 "@+id/action_hello"\uc0\u8232     \cf6 android\cf9 :title=\cf4 "@string/say_hello"
+\f2\b0 \cf0 ></
+\f1\b \cf7 item
+\f2\b0 \cf0 >"\uc0\u8232     <
+\f1\b \cf7 item \cf6 android\cf9 :id=\cf4 "@+id/action_goodbye"\uc0\u8232         \cf6 android\cf9 :title=\cf4 "@string/say_goodbye"
+\f2\b0 \cf0 ></
+\f1\b \cf7 item
+\f2\b0 \cf0 >"\uc0\u8232 </
+\f1\b \cf7 menu
+\f2\b0 \cf0 >\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+Again 
+\f1\b \cf4 @string/say_goodbye will 
+\f2\b0 \cf0 \
+\
+go to the TopMoviesActivity and add another option to the case statement:\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf7 case 
+\f2\b0 \cf0 R.id.
+\f3\i\b \cf6 action_hello
+\f2\i0\b0 \cf0 :\uc0\u8232     Toast.
+\f4\i makeText
+\f2\i0 (
+\f1\b \cf7 this
+\f2\b0 \cf0 , 
+\f1\b \cf4 "Is it me you're looking for?"
+\f2\b0 \cf0 , Toast.
+\f3\i\b \cf6 LENGTH_LONG
+\f2\i0\b0 \cf0 ).show();\uc0\u8232     
+\f1\b \cf7 return true
+\f2\b0 \cf0 ;\uc0\u8232 
+\f1\b \cf7 case 
+\f2\b0 \cf0 R.id.
+\f3\i\b \cf6 action_goodbye
+\f2\i0\b0 \cf0 :\uc0\u8232     Toast.
+\f4\i makeText
+\f2\i0 (
+\f1\b \cf7 this
+\f2\b0 \cf0 , 
+\f1\b \cf4 "I'm leaving"
+\f2\b0 \cf0 , Toast.
+\f3\i\b \cf6 LENGTH_LONG
+\f2\i0\b0 \cf0 ).show();\uc0\u8232     
+\f1\b \cf7 return true
+\f2\b0 \cf0 ;\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf10 @Override\uc0\u8232 
+\f1\b \cf7 public boolean 
+\f2\b0 \cf0 onOptionsItemSelected(MenuItem item) \{\uc0\u8232     
+\f1\b \cf7 switch 
+\f2\b0 \cf0 (item.getItemId()) \{\uc0\u8232         
+\f1\b \cf7 case 
+\f2\b0 \cf0 R.id.
+\f3\i\b \cf6 action_hello
+\f2\i0\b0 \cf0 :\uc0\u8232             Toast.
+\f4\i makeText
+\f2\i0 (
+\f1\b \cf7 this
+\f2\b0 \cf0 , 
+\f1\b \cf4 "Is it me you're looking for?"
+\f2\b0 \cf0 , Toast.
+\f3\i\b \cf6 LENGTH_LONG
+\f2\i0\b0 \cf0 ).show();\uc0\u8232             
+\f1\b \cf7 return true
+\f2\b0 \cf0 ;\uc0\u8232         
+\f1\b \cf7 case 
+\f2\b0 \cf0 R.id.
+\f3\i\b \cf6 action_goodbye
+\f2\i0\b0 \cf0 :\uc0\u8232             Toast.
+\f4\i makeText
+\f2\i0 (
+\f1\b \cf7 this
+\f2\b0 \cf0 , 
+\f1\b \cf4 "I'm leaving"
+\f2\b0 \cf0 , Toast.
+\f3\i\b \cf6 LENGTH_LONG
+\f2\i0\b0 \cf0 ).show();\uc0\u8232             
+\f4\i \cf8 // to get a another screen to come up from a menu \uc0\u8232             // provided you have created a GoodbyeActivity class\u8232             //  Intent intent = new Intent(this, GoodbyeActivity.class);\u8232             //  startActivity(intent);\u8232             
+\f1\i0\b \cf7 return true
+\f2\b0 \cf0 ;\uc0\u8232         
+\f1\b \cf7 default
+\f2\b0 \cf0 :\uc0\u8232             
+\f1\b \cf7 return super
+\f2\b0 \cf0 .onOptionsItemSelected(item);\uc0\u8232     \}\u8232 \}\
+\
+Project\
+\
+The focus is on persistence:\
+\
+hint: hash maps useful in these projects\
+\
+To Do list: android/java\
+small amount of details\
+DIY? \
+\
+Card game: android/java\
+Can base it on what i have done\
+my idea - 52 cards visuals? small pack for now\
+how about having the pictures of the cards when they come up\
+Player1 : cards dealt and all pictures\
+Player2 : cards dealt and all pictures\
+\
+Who the winner is showing the total. \
+\
+Fantasy Zoo Manager: (just java with optional android)\
+Plenty of TDD.\
+Not necessarily android but if feeling confident wrap it in android UI\
+A runner will do for this.\
+\
+Food Tracker: (android)\
+Android based as persistence\
+\
+Shop: \
+Just java - a bit like Ruby project but with Customer class added.\
+\
+\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f5\fs32 \cf11 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec11 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\fs24 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+}
